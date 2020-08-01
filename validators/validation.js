@@ -24,7 +24,29 @@ const supplierAuth = Joi.object({
     .required(),
   password: Joi.string().required()
 });
+
+// customer register validation
+const customerSchema = Joi.object({
+  customerName: Joi.string().required(),
+  phoneNumber: Joi.string()
+    .length(10)
+    .required(),
+  password: Joi.string()
+    .min(6)
+    .required()
+});
+
+// customter login
+const customerAuth = Joi.object({
+  phoneNumber: Joi.string()
+    .length(10)
+    .required(),
+  password: Joi.string().required()
+});
+
 module.exports = {
   supplierSchema,
-  supplierAuth
+  supplierAuth,
+  customerSchema,
+  customerAuth
 };

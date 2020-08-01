@@ -1,0 +1,111 @@
+.full-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.landing ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 50px 0 50px;
+  overflow: hidden;
+  background-color: #206efc;
+}
+
+.landing li {
+  float: left;
+}
+
+.landing li p {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.landing .logo-name {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-family: openSansBold;
+}
+
+.landing .right-link {
+  float: right;
+}
+
+.top-page {
+  display: flex;
+  flex-direction: row;
+  padding: 40px 50px 20px 60px;
+  justify-content: space-between;
+  height: 55%;
+  background-color: #206efc;
+  color: #ffffff;
+}
+
+.landing .header-content {
+  width: auto;
+}
+
+.landing .header-text {
+  font-family: openSansBold;
+  font-size: 35px;
+  width: 50vw;
+}
+
+.landing .header-sub-text {
+  font-family: openSansSemiBold;
+  font-size: 25px;
+}
+
+.landing .header-secondary-text {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.landing .header-secondary-text span {
+  color: #facc5e;
+}
+.landing .header-secondary-text .hand-icon {
+  color: #facc5e;
+  padding-left: 10px;
+  font-size: 50px;
+  vertical-align: middle;
+}
+
+.landing .leaf-icon {
+  font-size: 150px;
+  margin-top: 20px;
+  margin-right: 150px;
+}
+
+.bottom-page {
+  display: flex;
+  margin-top: -25px;
+  padding: 0 30px 0 30px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.landing .card {
+  flex-basis: 20vw;
+  height: auto;
+  box-shadow: 2px 2px 6px 4px rgba(0, 0, 0, 0.2);
+}
+
+.landing .card-content {
+  display: flex;
+  height: 18vh;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.go-button {
+  background-color: #206efc !important;
+  color: #ffffff !important;
+}

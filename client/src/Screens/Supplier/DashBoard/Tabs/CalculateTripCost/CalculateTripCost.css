@@ -1,0 +1,22 @@
+.suggestion-box{
+    border:1px solid #ccc;
+    border-bottom: none;
+}
+.suggestion-tile{
+    padding:10px;
+    border-bottom: 1px solid #ccc;
+    color:#2c3e50
+}
+.suggestion-tile:hover{
+    background-color: #cccccc36;
+    cursor: pointer;
+}
+.bold-text-large{
+    font-size: 17px;
+    color:#2c3e50;
+    font-weight: bold;
+}
+.bold-text{
+    color:#2c3e50;
+    font-weight: bold;
+}

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShoppingCart,
   faFilter,
-  faSeedling,
+  faSeedling
 } from "@fortawesome/free-solid-svg-icons";
 import { Button, Search, Dropdown } from "semantic-ui-react";
 import { FarmerContext } from "../../../Context/FarmerContext";
@@ -29,7 +29,7 @@ const FarmerHeader = (props) => {
     results,
     handleResultSelect,
     handleSearchChange,
-    searchProduct,
+    searchProduct
   } = props;
   const { farmerData, setFarmerData } = useContext(FarmerContext);
   const history = useHistory();
@@ -48,8 +48,8 @@ const FarmerHeader = (props) => {
     {
       key: "logout",
       text: <span onClick={handleLogout}>Logout</span>,
-      disabled: false,
-    },
+      disabled: false
+    }
   ];
 
   const handleLocaleChange = (e, { value }) => {
@@ -61,13 +61,13 @@ const FarmerHeader = (props) => {
     {
       key: "en",
       text: "Eng",
-      value: "en",
+      value: "en"
     },
     {
       key: "hin",
       text: "हिन्दी",
-      value: "hin",
-    },
+      value: "hin"
+    }
   ];
 
   return (
@@ -89,7 +89,7 @@ const FarmerHeader = (props) => {
               style={{
                 backgroundColor: "transparent",
                 color: "#ffffff",
-                borderColor: "transparent",
+                borderColor: "transparent"
               }}
             />
             <FontAwesomeIcon
@@ -152,7 +152,7 @@ FarmerHeader.propTypes = {
   /**
    * Search the product and set it..
    */
-  searchProduct: PropTypes.func.isRequired,
+  searchProduct: PropTypes.func.isRequired
 };
 
 export default FarmerHeader;

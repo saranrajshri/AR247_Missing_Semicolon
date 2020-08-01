@@ -1,10 +1,10 @@
 import React, { useState, createContext } from "react";
-// import { updateCurrentStatusOfOrder } from "../actions/actions";
+import { updateCurrentStatusOfOrder } from "../actions/actions";
 
 export const DriverContext = createContext();
 
 // Global state provider
-const DriverContextProvider = props => {
+const DriverContextProvider = (props) => {
   const [selectedComponent, setSelectedComponent] = useState("IncomingOrders");
   const [currentCoordinates, setCurrentCoordinates] = useState({});
   const [lastRecordedCoordinates, setLastRecordedCoordinates] = useState({});
@@ -18,13 +18,13 @@ const DriverContextProvider = props => {
   //   orders
   const [orders, setOrders] = useState([]);
 
-  const sleep = milliseconds => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds));
+  const sleep = (milliseconds) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
   };
 
   const getLocationUpdate = async (supplierID, orderID) => {
     if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(position => {
+      navigator.geolocation.watchPosition((position) => {
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
         var data = {
@@ -47,13 +47,13 @@ const DriverContextProvider = props => {
 
         setLastRecordedCoordinates(data);
 
-        // updateCurrentStatusOfOrder(supplierID, orderID, dataToBeSent)
-        //   .then(res => {
-        //     console.log("Location updated", res.data);
-        //   })
-        //   .catch(err => {
-        //     console.log(err);
-        //   });
+        updateCurrentStatusOfOrder(supplierID, orderID, dataToBeSent)
+          .then((res) => {
+            console.log("Location updated", res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         // update the location into DB for every minute
         sleep(60000).then(() => {
           getLocationUpdate(supplierID, orderID);

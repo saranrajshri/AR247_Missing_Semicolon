@@ -61,10 +61,15 @@ const fetchLiveUpdates = async (req, supplierID) => {
 
     const totalNumberOfMovingVechiles = await Order.find({
       supplierID: req.params.supplierID,
+      isOrderDelivered: false,
       "currentStatus.status": "onMove"
     }).count();
 
-    const markers = await Order.find({ supplierID: req.params.supplierID });
+    const markers = await Order.find({
+      supplierID: req.params.supplierID,
+      isOrderDelivered: false,
+      "currentStatus.status": "onMove"
+    });
     var arrayOfMarkes = [];
 
     markers.map(marker => {

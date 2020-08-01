@@ -1,0 +1,17 @@
+#full-width-searchbar{
+    width: 480px !important;
+}
+#full-width-searchbar-modal{
+    width: 860px !important;
+}
+.results {
+    width: 480px !important;
+}
+#float-right{
+    float: right;
+}
+.checkpoints-list{
+    margin-top: 10px;
+    font-weight: bold;
+    color:#2c3e50
+}

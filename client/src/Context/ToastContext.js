@@ -9,8 +9,8 @@ const ToastProvider = ({ children }) => {
   const [toasts, setToasts] = useState([]);
   // Add a toast content to toasts array and increment ID.
   const addToast = useCallback(
-    content => {
-      setToasts(toasts => [
+    (content) => {
+      setToasts((toasts) => [
         ...toasts,
         {
           id: id++,
@@ -22,9 +22,9 @@ const ToastProvider = ({ children }) => {
   );
   // Remove the toast by ID.
   const removeToast = useCallback(
-    id => {
+    (id) => {
       // Filter and set all the toast except the toast with given ID.
-      setToasts(toasts => toasts.filter(t => t.id !== id));
+      setToasts((toasts) => toasts.filter((t) => t.id !== id));
     },
     [setToasts]
   );

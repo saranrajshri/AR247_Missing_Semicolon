@@ -1,6 +1,5 @@
 import axios from "axios";
 import constants from "../Constants/constants";
-// Header with Auth tokens.
 const supplierHeaders = {
   Authorization: localStorage.getItem("supplierAuthToken")
 };
@@ -10,16 +9,28 @@ const customerHeaders = {
 const driverHeaders = {
   Authorization: localStorage.getItem("DRIVER_AUTH_TOKEN")
 };
-
-// Actions for API call to endpoints.
+// Actions for accessing route endpoints
 
 // ----------Supplier Actions---------- //
+/**
+ * Get live updates of overall orders of the supplier
+ * @param {String} supplierID
+ * @returns {Object} Response Object
+ */
+
+export const getLiveUpdates = supplierID => {
+  var res = axios.get(
+    `${constants.BASE_URL}/order/getLiveUpdates/${supplierID}`
+  );
+  return res;
+};
+
 /**
  *
  * @param {Object} regiterData
  * @returns {Object} Response Object
  */
-export const supplierRegister = (regiterData) => {
+export const supplierRegister = regiterData => {
   var res = axios.post(`${constants.BASE_URL}/supplier/create`, regiterData);
   return res;
 };
@@ -29,7 +40,7 @@ export const supplierRegister = (regiterData) => {
  * @param {Object} loginData
  * @returns {Object} Response Object
  */
-export const supplierLogin = (loginData) => {
+export const supplierLogin = loginData => {
   var res = axios.post(`${constants.BASE_URL}/supplier/login`, loginData);
   return res;
 };
@@ -41,6 +52,14 @@ export const isSupplierAuthenticated = () => {
   var res = axios.get(`${constants.BASE_URL}/supplier/isAuthenticated`, {
     headers: supplierHeaders
   });
+  return res;
+};
+
+/**
+ * @requires {Object} Response Object
+ */
+export const getSupplierMappings = () => {
+  var res = axios.get(`${constants.BASE_URL}/supplier/getMappings`);
   return res;
 };
 
@@ -57,14 +76,6 @@ export const updateSupplierDetails = (supplierData, supplierID) => {
   return res;
 };
 
-/**
- * @requires {Object} Response Object
- */
-export const getSupplierMappings = () => {
-  var res = axios.get(`${constants.BASE_URL}/supplier/getMappings`);
-  return res;
-};
-
 // Product actions
 
 /**
@@ -72,7 +83,7 @@ export const getSupplierMappings = () => {
  * @param {Object} productData
  * @returns {Object} Response object
  */
-export const addProduct = (productData) => {
+export const addProduct = productData => {
   var res = axios.post(
     `${constants.BASE_URL}/supplier/product/add`,
     productData
@@ -111,7 +122,7 @@ export const deleteProduct = (productBarCode, supplierID) => {
  * @param {String} supplierID
  * @returns {Array} List of product objects
  */
-export const getProductsOfASupplier = (supplierID) => {
+export const getProductsOfASupplier = supplierID => {
   var res = axios.get(
     `${constants.BASE_URL}/supplier/product/getProductsOfASupplier/${supplierID}`
   );
@@ -121,12 +132,28 @@ export const getProductsOfASupplier = (supplierID) => {
 // Driver actions
 
 /**
- * Adds a driver for supplier
- * @param {Object} driverData
- * @returns {Object} Response object
+ * Update the current status of the order
+ * @param {String} supplierID
+ * @param {String} orderID
+ * @returns {Object} Response Object
  */
-export const addDriver = (driverData) => {
-  var res = axios.post(`${constants.BASE_URL}/supplier/driver/add`, driverData);
+export const updateCurrentStatusOfOrder = (supplierID, orderID, data) => {
+  var res = axios.post(
+    `${constants.BASE_URL}/driver/order/updateCurrentStatus/${orderID}/${supplierID}`,
+    data
+  );
+  return res;
+};
+
+/**
+ * Get the list of drivers under the specified supplier
+ * @param {String} supplierID
+ * @returns {Array} List of driver objects
+ */
+export const getDriversOfASupplier = supplierID => {
+  var res = axios.get(
+    `${constants.BASE_URL}/supplier/driver/getDriversOfASupplier/${supplierID}`
+  );
   return res;
 };
 
@@ -144,25 +171,59 @@ export const deleteDriver = (driverID, supplierID) => {
 };
 
 /**
- * Get the list of drivers under the specified supplier
- * @param {String} supplierID
- * @returns {Array} List of driver objects
+ * Adds a driver for supplier
+ * @param {Object} driverData
+ * @returns {Object} Response object
  */
-export const getDriversOfASupplier = (supplierID) => {
-  var res = axios.get(
-    `${constants.BASE_URL}/supplier/driver/getDriversOfASupplier/${supplierID}`
+export const addDriver = driverData => {
+  var res = axios.post(`${constants.BASE_URL}/supplier/driver/add`, driverData);
+  return res;
+};
+
+/**
+ * Get the orders of the specified driver
+ * @param {String} driverID
+ */
+export const getOrdersOfDriver = driverID => {
+  var res = axios.get(`${constants.BASE_URL}/driver/getAllOrders/${driverID}`);
+  return res;
+};
+
+/**
+ * Update a order as pickedup
+ * @param {String} orderID
+ * @param {String} supplierID
+ * @returns {Object} Response Object
+ */
+
+export const markAsPicked = (driverID, supplierID, orderID) => {
+  var res = axios.post(
+    `${constants.BASE_URL}/driver/order/markAsPicked/${driverID}/${supplierID}/${orderID}`
+  );
+  return res;
+};
+
+/**
+ * Update a order as delivered
+ * @param {String} orderID
+ * @param {String} supplierID
+ * @returns {Object} Response Object
+ */
+
+export const markAsDelivered = (orderID, supplierID) => {
+  var res = axios.post(
+    `${constants.BASE_URL}/driver/order/markAsCompleted/${orderID}/${supplierID}`
   );
   return res;
 };
 
 // Order Actions
-
 /**
  * Get all the orders of the supplier
  * @param {String} supplierID
  * @returns {null} No response
  */
-export const getOrdersOfASupplier = (supplierID) => {
+export const getOrdersOfASupplier = supplierID => {
   var res = axios.get(
     `${constants.BASE_URL}/supplier/order/getOrdersOfASupplier/${supplierID}`
   );
@@ -183,25 +244,13 @@ export const dispatchOrder = (orderID, orderData, supplierID) => {
   return res;
 };
 
-/**
- * Get live updates of overall orders of the supplier
- * @param {String} supplierID
- * @returns {Object} Response Object
- */
-export const getLiveUpdates = (supplierID) => {
-  var res = axios.get(
-    `${constants.BASE_URL}/order/getLiveUpdates/${supplierID}`
-  );
-  return res;
-};
-
 // ----------Customer Actions---------- //
 /**
  * Register a new customer.
  * @param {Object} customerData - Customer details for registration.
  * @returns {Response} - Response object
  */
-export const registerCustomer = (customerData) => {
+export const registerCustomer = customerData => {
   var res = axios.post(`${constants.BASE_URL}/customer/create`, customerData);
   return res;
 };
@@ -211,7 +260,7 @@ export const registerCustomer = (customerData) => {
  * @param {Object} credentials - Customer's login credentials.
  * @returns {Response} - Response object
  */
-export const loginCustomer = (credentials) => {
+export const loginCustomer = credentials => {
   var res = axios.post(`${constants.BASE_URL}/customer/login`, credentials);
   return res;
 };
@@ -270,7 +319,7 @@ export const removeItemFromCart = (customerID, productID) => {
  * @param {Object} productsID - Object with products id in array.
  * @returns {Array.<Object>} - Array with product details object
  */
-export const getProductsInCart = (productsID) => {
+export const getProductsInCart = productsID => {
   var res = axios.post(
     `${constants.BASE_URL}/customer/getProductsFromCart`,
     productsID
@@ -283,7 +332,7 @@ export const getProductsInCart = (productsID) => {
  * @param {Object} orderData - Object with order details.
  * @returns {Object} - Object with order receipt and details.
  */
-export const placeOrder = (orderData) => {
+export const placeOrder = orderData => {
   var res = axios.post(`${constants.BASE_URL}/user/order/add`, orderData);
   return res;
 };
@@ -294,7 +343,7 @@ export const placeOrder = (orderData) => {
  * @param {Object} credentials - Driver credentials for login.
  * @return {Object} - Driver data object.
  */
-export const loginDriver = (credentials) => {
+export const loginDriver = credentials => {
   var res = axios.post(`${constants.BASE_URL}/driver/login`, credentials);
   return res;
 };
@@ -307,54 +356,5 @@ export const checkDriverAuthentication = () => {
   var res = axios.get(`${constants.BASE_URL}/driver/isAuthenticated`, {
     headers: driverHeaders
   });
-  return res;
-};
-
-/**
- * Get the orders of the specified driver
- * @param {String} driverID
- */
-export const getOrdersOfDriver = (driverID) => {
-  var res = axios.get(`${constants.BASE_URL}/driver/getAllOrders/${driverID}`);
-  return res;
-};
-
-/**
- * Update a order as pickedup
- * @param {String} orderID
- * @param {String} supplierID
- * @returns {Object} Response Object
- */
-export const markAsPicked = (driverID, supplierID, orderID) => {
-  var res = axios.post(
-    `${constants.BASE_URL}/driver/order/markAsPicked/${driverID}/${supplierID}/${orderID}`
-  );
-  return res;
-};
-
-/**
- * Update a order as delivered
- * @param {String} orderID
- * @param {String} supplierID
- * @returns {Object} Response Object
- */
-export const markAsDelivered = (orderID, supplierID) => {
-  var res = axios.post(
-    `${constants.BASE_URL}/driver/order/markAsCompleted/${orderID}/${supplierID}`
-  );
-  return res;
-};
-
-/**
- * Update the current status of the order
- * @param {String} supplierID
- * @param {String} orderID
- * @returns {Object} Response Object
- */
-export const updateCurrentStatusOfOrder = (supplierID, orderID, data) => {
-  var res = axios.post(
-    `${constants.BASE_URL}/driver/order/updateCurrentStatus/${orderID}/${supplierID}`,
-    data
-  );
   return res;
 };

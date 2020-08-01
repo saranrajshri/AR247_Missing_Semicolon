@@ -4,35 +4,35 @@ const Schema = mongoose.Schema;
 const SupplierSchema = new Schema({
   supplierName: {
     type: String,
-    required: true
+    required: true,
   },
   agencyName: {
     type: String,
-    required: true
+    required: true,
   },
   phoneNumber: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   faxNumber: {
-    type: String
+    type: String,
   },
   address: {
     type: String,
-    required: true
+    required: true,
   },
   wareHouse: {
     type: {},
-    default: {}
-  }
+    default: {},
+  },
 });
 
 var supplier = mongoose.model("supplier", SupplierSchema);
