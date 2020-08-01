@@ -12,28 +12,26 @@ const Routes = () => {
     <div>
       <Router>
         <Switch>
-          {/* TO DO */}
-
-          {/* <Route path="/" exact component={Landing} /> */}
+          <Route path="/" exact component={Landing} />
           {/* Supplier routes */}
-          {/* <Route path="/supplier/home" exact component={Home} />
+          <Route path="/supplier/home" exact component={Home} />
           <Route path="/supplier/login" exact component={Login} />
-          <Route path="/supplier/signup" exact component={Signup} /> */}
+          <Route path="/supplier/signup" exact component={Signup} />
           {/* Driver routes */}
-          {/* <PrivateRoute path="/driver/home" exact component={Driver} />
-          <Route path="/driver/login" exact component={DriverLogin} /> */}
+          <PrivateRoute path="/driver/home" exact component={Driver} />
+          <Route path="/driver/login" exact component={DriverLogin} />
           {/* Farmer routes */}
 
-          {/* <Route path="/farmer/login" exact component={Signin} />
+          <Route path="/farmer/login" exact component={Signin} />
           <Route path="/farmer/register" exact component={Register} />
           <Route path="/farmer/home" exact component={FarmerHome} />
           <Route
             path="/farmer/product/:productId"
             exact
             component={ProductDescription}
-          /> */}
-          {/* <PrivateRoute path="/farmer/checkout" exact component={Checkout} /> */}
-          {/* <PrivateRoute path="/farmer/cart" exact component={CartScreen} /> */}
+          />
+          <PrivateRoute path="/farmer/checkout" exact component={Checkout} />
+          <PrivateRoute path="/farmer/cart" exact component={CartScreen} />
         </Switch>
       </Router>
     </div>
