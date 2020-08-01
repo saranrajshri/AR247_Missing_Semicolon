@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRupeeSign } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 /**
  * Display product in a card with image.
  * @param {Props} props
@@ -9,6 +10,7 @@ import { faRupeeSign } from "@fortawesome/free-solid-svg-icons";
 const ProductCard = (props) => {
   const { product, onSelect, supplier } = props;
 
+  const { t } = useTranslation();
   return (
     <div className="product-wrapper" onClick={() => onSelect(product)}>
       <div className="product-img">
@@ -26,7 +28,7 @@ const ProductCard = (props) => {
           <p>
             <FontAwesomeIcon icon={faRupeeSign} />
             <span>{parseFloat(product.productPrice).toFixed(2)}</span>
-            <span className="product-kg">/kg</span>
+            <span className="product-kg">/ {t("kg")}</span>
           </p>
         </div>
       </div>
