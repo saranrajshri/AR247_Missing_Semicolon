@@ -117,3 +117,40 @@ export const getProductsOfASupplier = (supplierID) => {
   );
   return res;
 };
+
+// Driver actions
+
+/**
+ * Adds a driver for supplier
+ * @param {Object} driverData
+ * @returns {Object} Response object
+ */
+export const addDriver = (driverData) => {
+  var res = axios.post(`${constants.BASE_URL}/supplier/driver/add`, driverData);
+  return res;
+};
+
+/**
+ * Delete a driver from a supplier
+ * @param {String} driverID
+ * @param {String} supplierID
+ * @returns {Object} Response object
+ */
+export const deleteDriver = (driverID, supplierID) => {
+  var res = axios.post(
+    `${constants.BASE_URL}/supplier/driver/delete/${driverID}/${supplierID}`
+  );
+  return res;
+};
+
+/**
+ * Get the list of drivers under the specified supplier
+ * @param {String} supplierID
+ * @returns {Array} List of driver objects
+ */
+export const getDriversOfASupplier = (supplierID) => {
+  var res = axios.get(
+    `${constants.BASE_URL}/supplier/driver/getDriversOfASupplier/${supplierID}`
+  );
+  return res;
+};
