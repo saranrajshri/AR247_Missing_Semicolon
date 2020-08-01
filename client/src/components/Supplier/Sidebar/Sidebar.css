@@ -1,0 +1,94 @@
+.sidebar {
+  height: 100%;
+  width: 220px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #233646;
+  overflow-x: hidden;
+  padding-top: 20px;
+  overflow-y: hidden;
+}
+
+.avatar {
+  width: 50px;
+  margin: 20px 20px 20px 20px;
+  height: 50px;
+  background-color: #008aff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 50px;
+  font-size: 25px;
+  font-weight: 500;
+  color: #fff;
+}
+.sidebar-content-wrapper .username {
+  color: #fff;
+  margin: 20px;
+  font-size: 16px;
+  color: #dadfe8;
+}
+.sidebar-light {
+  background-color: #2f3f4f;
+  height: 500px;
+}
+.sidebar-menu {
+  margin-top: 40px;
+  cursor: pointer;
+  height: auto;
+}
+.menu-title {
+  padding-left: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #2f3f4f;
+}
+.menu-title:hover {
+  background-color: #293846;
+}
+.menu-title:hover .menu-item {
+  color: #fff;
+}
+.menu-item {
+  color: #9fabbb;
+  font-size: 15px;
+  user-select: none;
+}
+.chevron {
+  float: right;
+  margin-right: 20px;
+}
+.subcategory-title {
+  padding-left: 40px;
+  color: #9fabbb;
+  font-size: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  user-select: none;
+}
+.subcategory-title:hover {
+  background-color: #293846;
+}
+
+.signout {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#sign-out .signout-button {
+  border: 1px solid #16212be8;
+  background-color: #233646;
+  color: #9fabbb !important;
+  margin-right: -3.5px !important;
+  font-size: 15px;
+}
+
+#sign-out .signout-button:hover,
+#sign-out .signout-button:active,
+#sign-out .signout-button:focus {
+  border: transparent !important;
+  background-color: #374653 !important;
+  box-shadow: 1px 1px 4px 4px rgba(0, 0, 0, 0.2) !important;
+  color: #aab4c2 !important;
+}
