@@ -172,3 +172,13 @@ customer.isCustomerAuthenticated = (req, res, next) => {
     next(err);
   }
 };
+
+// get the orders of the customer
+customer.getOrdersOfCustomer = async (req, res, next) => {
+  try {
+    const orders = await Customer.find({ _id: req.params.customerID });
+    res.send(orders);
+  } catch (err) {
+    next(err);
+  }
+};

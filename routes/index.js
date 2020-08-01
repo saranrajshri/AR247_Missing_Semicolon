@@ -78,5 +78,9 @@ router
   .post("/customer/addToCart/:customerID", customer.addItemToCart)
   .post("/customer/pullFromCart/:customerID", customer.pullItemFromCart)
   .get("/customer/isAuthenticated", customer.isCustomerAuthenticated)
-  .post("/customer/getProductsFromCart", customer.getProductsFromCart);
+  .post("/customer/getProductsFromCart", customer.getProductsFromCart)
+  .get(
+    "/customer/getOrdersOfCustomer/:customerID",
+    customer.getOrdersOfCustomer
+  );
 module.exports = router;
