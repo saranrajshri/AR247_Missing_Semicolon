@@ -13,7 +13,8 @@ import {
   CalculateTripCost,
   AssignDrivers,
   IncomingOrders,
-  Settings
+  Settings,
+  Notifications
 } from "./Tabs";
 
 // Context
@@ -65,7 +66,8 @@ const Home = () => {
     AssignDrivers: AssignDrivers,
     ManageOrders: ManageOrders,
     IncomingOrders: IncomingOrders,
-    Settings: Settings
+    Settings: Settings,
+    Notifications: Notifications
   };
   var Component = mapping[selectedComponent];
 

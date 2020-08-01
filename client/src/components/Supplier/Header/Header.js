@@ -13,7 +13,9 @@ import { faBars, faBell } from "@fortawesome/free-solid-svg-icons";
 import { Context } from "../../../Context/Context";
 
 const Header = () => {
-  const { selectedComponent, notifications } = useContext(Context);
+  const { selectedComponent, notifications, setSelectedComponent } = useContext(
+    Context
+  );
   return (
     <div className="header">
       {/* React Helmet (for the changing the page title dynamically)*/}
@@ -28,6 +30,7 @@ const Header = () => {
         <Label
           style={{ marginLeft: 20 }}
           color="yellow"
+          onClick={() => setSelectedComponent("Notifications")}
           className="cursor-pointer"
         >
           <Icon name="mail" /> {notifications.length}
