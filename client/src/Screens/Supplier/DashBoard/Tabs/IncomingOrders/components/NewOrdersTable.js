@@ -18,6 +18,7 @@ const NewOrdersTable = props => {
           <Table.HeaderCell>Price</Table.HeaderCell>
           <Table.HeaderCell>Quantity</Table.HeaderCell>
           <Table.HeaderCell>Delivery Address</Table.HeaderCell>
+          <Table.HeaderCell>Order Assigned</Table.HeaderCell>
           <Table.HeaderCell>Order Picked</Table.HeaderCell>
           <Table.HeaderCell>Order Delivered</Table.HeaderCell>
           <Table.HeaderCell>Options</Table.HeaderCell>
@@ -32,6 +33,13 @@ const NewOrdersTable = props => {
             <Table.Cell>{order.orderData.orderPrice}</Table.Cell>
             <Table.Cell>{order.orderData.products.length}</Table.Cell>
             <Table.Cell>{order.tripData.dropLocationName}</Table.Cell>
+            <Table.Cell textAlign="center">
+              {order.isOrderAssigned ? (
+                <Icon name="toggle on" size="large" color="green" />
+              ) : (
+                <Icon name="toggle off" size="large" color="red" />
+              )}
+            </Table.Cell>
             <Table.Cell textAlign="center">
               {order.isOrderDispatched ? (
                 <Icon name="toggle on" size="large" color="green" />
