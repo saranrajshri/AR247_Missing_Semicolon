@@ -114,6 +114,23 @@ const OrderDetailsModal = (props) => {
               )}
             </div>
             <div className="ship-details">
+              <p className="ship-label">trip info</p>
+              <div className="ship-info">
+                <p>
+                  Rest Time:{" "}
+                  <span>
+                    {(
+                      parseFloat(
+                        order.restTime.endTime.substring(0, 5)
+                      ).toFixed(2) -
+                      parseFloat(
+                        order.restTime.startTime.substring(0, 5)
+                      ).toFixed(2)
+                    ).toFixed(2) * 100}{" "}
+                    min
+                  </span>
+                </p>
+              </div>
               <p className="ship-label">customer details</p>
               <div className="ship-info">
                 <p>
@@ -230,7 +247,8 @@ OrderDetailsModal.defaultProps = {
       labels: [],
       pickUpCoordinates: { lat: 13, lon: 80 },
       pickUpLocationName: ""
-    }
+    },
+    restTime: { startTime: "", endTime: "" }
   },
   drivers: [
     {
