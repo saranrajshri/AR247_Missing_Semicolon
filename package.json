@@ -1,0 +1,8 @@
+{
+  "name": "AR247_Missing_Semicolon",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/saranrajshri/AR247_Missing_Semicolon.git",
+  "author": "Shrisaranraj <saran.raj@gogosoon.com>",
+  "license": "MIT"
+}
