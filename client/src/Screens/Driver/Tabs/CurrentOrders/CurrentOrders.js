@@ -11,7 +11,10 @@ import {
   faPlay
 } from "@fortawesome/free-solid-svg-icons";
 import { DriverContext } from "../../../../Context/DriverContext";
-import { markAsDelivered } from "../../../../actions/actions";
+import {
+  markAsDelivered,
+  updateNotification
+} from "../../../../actions/actions";
 import { useToast } from "../../../../Context/ToastContext";
 
 const CurrentOrders = () => {
@@ -65,11 +68,24 @@ const CurrentOrders = () => {
     });
   };
 
-  const pauseTrip = () => {
+  const pauseTrip = supplierID => {
     setPause(!isTripPaused);
     addToast({
       type: "success",
       message: isTripPaused ? "Trip Paused" : "Trip Resumed"
+    });
+    var data = {
+      title: isTripPaused
+        ? `Driver ID - Paused`
+        : `Driver ID - Resumed the trip`,
+
+      message: isTripPaused
+        ? `Driver ID - Paused`
+        : `Driver ID - Resumed the trip`,
+      supplierID: supplierID
+    };
+    updateNotification(data).then(res => {
+      console.log(res.data);
     });
   };
 
@@ -145,12 +161,20 @@ const CurrentOrders = () => {
                   <div className="grid-item">
                     <p className="text-bold text-dark-blue">Supplier Contact</p>
                     {isTripPaused ? (
-                      <Button primary onClick={pauseTrip} color="green">
+                      <Button
+                        primary
+                        onClick={() => pauseTrip(order.supplierID)}
+                        color="green"
+                      >
                         <FontAwesomeIcon icon={faPlay} className="icon" />
                         Resume Trip
                       </Button>
                     ) : (
-                      <Button primary onClick={pauseTrip} color="red">
+                      <Button
+                        primary
+                        onClick={() => pauseTrip(order.supplierID)}
+                        color="red"
+                      >
                         <FontAwesomeIcon icon={faPause} className="icon" />
                         Pause Trip
                       </Button>

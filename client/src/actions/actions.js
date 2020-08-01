@@ -345,6 +345,11 @@ export const placeOrder = orderData => {
 };
 
 // ---------- Driver actions ---------- //
+export const updateNotification = data => {
+  var res = axios.post(`${constants.BASE_URL}/driver/updateNotification`, data);
+  return res;
+};
+
 /**
  * Login for driver.
  * @param {Object} credentials - Driver credentials for login.
