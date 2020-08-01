@@ -57,6 +57,27 @@ const ManageProducts = () => {
       }
     });
   };
+  const handleUpdate = (barCode, product) => {
+    setFullScreenLoader(true);
+    setEditModal(false);
+    updateProduct(barCode, product).then((res) => {
+      if (res.status === 200) {
+        setFullScreenLoader(false);
+        setAlert({
+          message: "Updated Successfully",
+          isOpen: true,
+          alertType: "positive",
+        });
+      } else {
+        setFullScreenLoader(false);
+        setAlert({
+          message: "Failed to update",
+          isOpen: false,
+          alertType: "negative",
+        });
+      }
+    });
+  };
 
 
 
@@ -90,7 +111,15 @@ const ManageProducts = () => {
           />
         )}
       </div>
-      {/*TODO Edit product modal */}
+      {/* Edit product modal */}
+      <div>
+        <EditProductModal
+          visible={editModal}
+          product={editProduct}
+          handleClose={() => setEditModal(false)}
+          handleDone={(barCode, product) => handleUpdate(barCode, product)}
+        />
+      </div>
       
     </div>
   );
