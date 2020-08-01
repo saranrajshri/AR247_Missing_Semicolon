@@ -84,5 +84,6 @@ router
   .get(
     "/customer/getOrdersOfCustomer/:customerID",
     customer.getOrdersOfCustomer
-  );
+  )
+  .post("/customer/addFeedback", customer.addFeedback);
 module.exports = router;
