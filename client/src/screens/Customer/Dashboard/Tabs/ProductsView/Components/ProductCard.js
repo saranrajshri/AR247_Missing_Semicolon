@@ -9,7 +9,6 @@ import { faRupeeSign } from "@fortawesome/free-solid-svg-icons";
 const ProductCard = (props) => {
   const { product, onSelect, supplier } = props;
 
-  const { t } = useTranslation();
   return (
     <div className="product-wrapper" onClick={() => onSelect(product)}>
       <div className="product-img">

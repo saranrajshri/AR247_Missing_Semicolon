@@ -11,10 +11,16 @@ const ProductsView = (props) => {
   const { supplierMappings } = useContext(Context);
   const history = useHistory();
 
-  //Description to be created
-  //   const handleSelect = (product) => {
-  //     history.push(`/farmer/product/${product.barCode}`);
-  //   };
+  const handleSelect = (product) => {
+    history.push(`/farmer/product/${product.barCode}`);
+  };
+
+  useEffect(() => {
+    const setProductsToState = () => {
+      setProducts(props.products);
+    };
+    setProductsToState();
+  }, [props.products]);
 
   return (
     <div className="body-wrapper">
@@ -24,7 +30,7 @@ const ProductsView = (props) => {
             key={product.barCode}
             product={product}
             supplier={supplierMappings[product.supplierID]}
-            // onSelect={handleSelect}
+            onSelect={handleSelect}
           />
         ))}
       </div>
