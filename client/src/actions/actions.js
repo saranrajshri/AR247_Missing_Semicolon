@@ -1,6 +1,5 @@
 import axios from "axios";
 import constants from "../Constants/constants";
-
 const supplierHeaders = {
   Authorization: localStorage.getItem("supplierAuthToken")
 };
@@ -237,7 +236,6 @@ export const getOrdersOfASupplier = supplierID => {
  * @param {Object} orderData
  * @returns {Object} Response Object
  */
-
 export const dispatchOrder = (orderID, orderData, supplierID) => {
   var res = axios.post(
     `${constants.BASE_URL}/supplier/order/dispatch/${orderID}/${supplierID}`,
