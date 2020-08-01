@@ -9,8 +9,11 @@ import { faPlusCircle, faEraser } from "@fortawesome/free-solid-svg-icons";
 
 // Context
 import { Context } from "../../../../../../../Context/Context";
+// Actions
+import { addProduct } from "../../../../../actions/actions";
 
-// TODO refs
+// refs
+const imageUploadRef = useRef(null);
 
 
 const AddProduct = () => {
@@ -51,8 +54,49 @@ const AddProduct = () => {
       isHidden: false,
     });
   };
-
-  // TODO Image Upload
+// Trigger Image Upload
+  const triggerImageUpload = (e) => {
+    try {
+      imageUploadRef.current._handleSubmit(e);
+    } catch {
+      setAlert({
+        alertType: "negative",
+        isOpen: true,
+        message: "Select a valid image",
+      });
+    }
+  };
+  // This function will be triggered from the imageUpload Component
+  // Add product to DB
+  const submit = (imageURL) => {
+    setFullScreenLoader(true);
+    if (imageURL !== "") {
+      var productData = product;
+      productData.supplierID = supplierData._id;
+      productData.imageURL = imageURL;
+      addProduct(productData)
+        .then((res) => {
+          if (res.status === 200) {
+            imageUploadRef.current._clearState();
+            setFullScreenLoader(false);
+            // Show success message
+            setAlert({
+              alertType: "positive",
+              isOpen: true,
+              message: "Product Added Succesfully",
+            });
+            clear(); // clear the state
+          } else {
+            setFullScreenLoader(false);
+            setError({ content: "Failed to add product", pointer: "above " });
+          }
+        })
+        .catch((err) => {
+          setFullScreenLoader(false);
+          setError({ content: "Barcode already exists", pointer: "above " });
+        });
+    }
+  };
 
   
 
@@ -132,10 +176,17 @@ const AddProduct = () => {
                 <FontAwesomeIcon icon={faEraser} className="icon" />
                 Clear
               </Button>
-              <Button primary >
+              <Button primary onClick={triggerImageUpload}>
                 <FontAwesomeIcon icon={faPlusCircle} className="icon" />
                 Add
               </Button>
+            </div>
+          </div>
+        </div>
+        <div className="grid-item">
+          <div className="card">
+            <div className="card-content">
+              <ImageUpload ref={imageUploadRef} submit={submit} />
             </div>
           </div>
         </div>
