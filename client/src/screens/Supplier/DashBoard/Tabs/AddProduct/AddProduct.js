@@ -8,18 +8,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle, faEraser } from "@fortawesome/free-solid-svg-icons";
 
 // Context
-import { Context } from "../../../../../../../Context/Context";
+import { Context } from "../../../../../Context/Context";
 // Actions
 import { addProduct } from "../../../../../actions/actions";
 
 // refs
 const imageUploadRef = useRef(null);
 
-
 const AddProduct = () => {
   const { setFullScreenLoader, setAlert, supplierData } = useContext(Context);
-
-
 
   // Product state
   const [product, setProduct] = useState({
@@ -28,7 +25,7 @@ const AddProduct = () => {
     productPrice: 0,
     availableQuantity: 0,
     productDescription: "",
-    isHidden: false,
+    isHidden: false
   });
   const [error, setError] = useState(null);
 
@@ -51,10 +48,10 @@ const AddProduct = () => {
       productPrice: 0,
       availableQuantity: 0,
       productDescription: "",
-      isHidden: false,
+      isHidden: false
     });
   };
-// Trigger Image Upload
+  // Trigger Image Upload
   const triggerImageUpload = (e) => {
     try {
       imageUploadRef.current._handleSubmit(e);
@@ -62,7 +59,7 @@ const AddProduct = () => {
       setAlert({
         alertType: "negative",
         isOpen: true,
-        message: "Select a valid image",
+        message: "Select a valid image"
       });
     }
   };
@@ -83,7 +80,7 @@ const AddProduct = () => {
             setAlert({
               alertType: "positive",
               isOpen: true,
-              message: "Product Added Succesfully",
+              message: "Product Added Succesfully"
             });
             clear(); // clear the state
           } else {
@@ -97,8 +94,6 @@ const AddProduct = () => {
         });
     }
   };
-
-  
 
   return (
     <div className="p-5">
@@ -190,7 +185,7 @@ const AddProduct = () => {
             </div>
           </div>
         </div>
-        </div>      
+      </div>
     </div>
   );
 };
