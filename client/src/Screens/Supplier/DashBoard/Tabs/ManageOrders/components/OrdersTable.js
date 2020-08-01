@@ -49,7 +49,9 @@ const OrdersTable = props => {
                         ) : (
                           <Icon name="toggle off" size="large" color="red" />
                         )
-                      ) : null}
+                      ) : (
+                        <Icon name="toggle off" size="large" color="red" />
+                      )}
                     </Table.Cell>
                   </Table.Row>
                 }

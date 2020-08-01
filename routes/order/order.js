@@ -39,15 +39,15 @@ const reverseGeoCoder = async coordinates => {
 };
 
 const fetchOrdersOfASupplier = (req, supplierID) => {
-  var client = req.app.get("client");
-  Order.find({ supplierID: supplierID })
-    .sort({ orderID: -1 })
-    .then(orders => {
-      client.emit("orders", orders);
-    })
-    .catch(() => {
-      client.emit("orders", []);
-    });
+  // var client = req.app.get("client");
+  // Order.find({ supplierID: supplierID })
+  //   .sort({ orderID: -1 })
+  //   .then(orders => {
+  //     client.emit("orders", orders);
+  //   })
+  //   .catch(() => {
+  //     client.emit("orders", []);
+  //   });
 };
 
 const fetchLiveUpdates = async (req, supplierID) => {
@@ -202,7 +202,15 @@ order.add = async (req, res) => {
 
 // get orders of a supplier
 order.getOrdersOfASupplier = (req, res) => {
-  fetchOrdersOfASupplier(req, req.params.supplierID);
+  Order.find({ supplierID: req.params.supplierID })
+    .sort({ orderID: -1 })
+    .then(orders => {
+      res.send(orders);
+    })
+    .catch(err => {
+      res.send(err);
+    });
+  // fetchOrdersOfASupplier(req, req.params.supplierID);
 };
 
 // dispatch a order

@@ -78,7 +78,7 @@ const Home = () => {
       setDrivers(drivers);
     });
     socket.on("orders", orders => {
-      setOrders(orders);
+      // setOrders(orders);
     });
     socket.on("liveUpdates", liveUpdates => {
       setLiveUpdates(liveUpdates);
@@ -93,7 +93,9 @@ const Home = () => {
         setSupplierData(res.data);
         getProductsOfASupplier(res.data._id);
         getDriversOfASupplier(res.data._id);
-        getOrdersOfASupplier(res.data._id);
+        getOrdersOfASupplier(res.data._id).then(res => {
+          setOrders(res.data);
+        });
         getLiveUpdates(res.data._id);
       })
       .catch(() => {
