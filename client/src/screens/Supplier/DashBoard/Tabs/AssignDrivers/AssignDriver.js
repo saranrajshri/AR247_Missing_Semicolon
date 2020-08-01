@@ -3,6 +3,7 @@ import React, { useState, useContext } from "react";
 import { Form, Input, Label, Search, Button } from "semantic-ui-react";
 import { Context } from "../../../../../Context/Context";
 import AddCheckPointsModal from "./components/AddCheckPointsModal";
+import ShowRouteMap from "./components/ShowRouteMap";
 
 
 import { dispatchOrder } from "../../../../../actions/actions";
