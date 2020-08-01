@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./CurrentOrders.css";
 import { Card, CardContent, Button, Divider } from "semantic-ui-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,7 +6,9 @@ import {
   faMapMarkerAlt,
   faRupeeSign,
   faPhoneAlt,
-  faCheckCircle
+  faCheckCircle,
+  faPause,
+  faPlay
 } from "@fortawesome/free-solid-svg-icons";
 import { DriverContext } from "../../../../Context/DriverContext";
 import { markAsDelivered } from "../../../../actions/actions";
@@ -15,6 +17,7 @@ import { useToast } from "../../../../Context/ToastContext";
 const CurrentOrders = () => {
   const { orders, watchDriverPosition } = useContext(DriverContext);
   const { addToast } = useToast();
+  const [isTripPaused, setPause] = useState(false);
 
   const openGoogleMaps = (pickUpLocationName, dropLocationName) => {
     const pickUpLocation = pickUpLocationName.replace(" ", "+");
@@ -59,6 +62,14 @@ const CurrentOrders = () => {
       // addToast({});
       watchDriverPosition(order.supplierID, order.orderID);
       // window.location.reload();
+    });
+  };
+
+  const pauseTrip = () => {
+    setPause(!isTripPaused);
+    addToast({
+      type: "success",
+      message: isTripPaused ? "Trip Paused" : "Trip Resumed"
     });
   };
 
@@ -133,6 +144,17 @@ const CurrentOrders = () => {
                 <div className="grid-container">
                   <div className="grid-item">
                     <p className="text-bold text-dark-blue">Supplier Contact</p>
+                    {isTripPaused ? (
+                      <Button primary onClick={pauseTrip} color="green">
+                        <FontAwesomeIcon icon={faPlay} className="icon" />
+                        Resume Trip
+                      </Button>
+                    ) : (
+                      <Button primary onClick={pauseTrip} color="red">
+                        <FontAwesomeIcon icon={faPause} className="icon" />
+                        Pause Trip
+                      </Button>
+                    )}
                     <Button primary>
                       <FontAwesomeIcon icon={faPhoneAlt} className="icon" />
                       Call Supplier
