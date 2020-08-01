@@ -1,4 +1,5 @@
 import React from 'react';
+import './CurrentOrders.css';
 
 const CurrentOrders = () => {
     return(

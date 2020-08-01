@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Menu } from "semantic-ui-react";
-import IncomingOrders from "./Tabs/IncomingOrders";
-import CurrentOrders from "./Tabs/CurrentOrders";
-import FinishedOrders from "./Tabs/FinishedOrders";
+import IncomingOrders from "./Tabs/IncomingOrders/IncomingOrders";
+import CurrentOrders from "./Tabs/CurrentOrders/CurrentOrders";
 
 const Driver = () => {
   const [activeItem, setactiveItem] = useState("incoming");
@@ -12,13 +11,7 @@ const Driver = () => {
 
       {activeItem == "incoming" ? (
         <IncomingOrders />
-      ) : activeItem == "current" ? (
-        <CurrentOrders />
-      ) : activeItem == "finished" ? (
-        <FinishedOrders />
-      ) : (
-        ""
-      )}
+      ) : ( <CurrentOrders /> ) }
 
       <Menu fixed="bottom" tabular>
         <Menu.Item
@@ -35,14 +28,6 @@ const Driver = () => {
           onClick={handleItemClick}
         >
           Current Orders
-        </Menu.Item>
-
-        <Menu.Item
-          name="finished"
-          active={activeItem === "finished"}
-          onClick={handleItemClick}
-        >
-          Finished Orders
         </Menu.Item>
       </Menu>
     </div>
