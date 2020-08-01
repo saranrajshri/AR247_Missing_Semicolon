@@ -1,38 +1,89 @@
-.App {
-  text-align: center;
+/* Fonts */
+@font-face {
+  font-family: openSansLight;
+  src: url('./assets/Open_Sans/OpenSans-Light.ttf');
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: openSans;
+  src: url('./assets/Open_Sans/OpenSans-Regular.ttf');
+}
+@font-face {
+  font-family: openSansSemiBold;
+  src: url('./assets/Open_Sans/OpenSans-SemiBold.ttf');
+}
+@font-face {
+  font-family: openSansBold;
+  src: url('./assets/Open_Sans/OpenSans-Bold.ttf');
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* General */
+body{
+  margin: 0;
+  padding: 0;
+  font-family: openSans;
+  background-color: #f3f3f4;
+  overflow-x: hidden;
+}
+.main-content{
+  margin-left:220px;
+}
+.icon{
+  margin-right:10px;
+  cursor: pointer;
+}
+label{
+  color:#2c3e50
+}
+.ui.form .field > label{
+  color:#2c3e50
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* text */
+.title{
+  font-size: 18px;
+}
+.text-dark{
+  color:#7d7f81
+}
+.text-dark-blue{
+  color:#2c3e50
+}
+/* Padding */
+.p-5{
+  padding:30px;
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Grid */
+/* container with two cols */
+.grid-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+/* container with two cols (one with more width) */
+.grid-container-2{
+  display: grid;
+  grid-template-columns: 2fr  1fr;
+}
+.grid-item{
+  margin-right:10px;
+}
+/* Card */
+.card{
+  background-color: #fff;
+  border-radius: 5px;
+}
+.card-header{
+  padding: 15px 15px 15px 20px;
+  color:#6d7072;
+  font-family: openSansSemiBold;
+  font-size: 15px;;
+  border-bottom: 1px solid #d4d4d46b;
+}
+.card-content{
+  padding: 15px 15px 15px 20px;
+}
+.card-footer{
+  margin-top:10px;
 }
