@@ -1,5 +1,5 @@
 import React, { useState, createContext } from "react";
-import { updateCurrentStatusOfOrder } from "../actions/actions";
+// import { updateCurrentStatusOfOrder } from "../actions/actions";
 
 export const DriverContext = createContext();
 
@@ -47,13 +47,13 @@ const DriverContextProvider = props => {
 
         setLastRecordedCoordinates(data);
 
-        updateCurrentStatusOfOrder(supplierID, orderID, dataToBeSent)
-          .then(res => {
-            console.log("Location updated", res.data);
-          })
-          .catch(err => {
-            console.log(err);
-          });
+        // updateCurrentStatusOfOrder(supplierID, orderID, dataToBeSent)
+        //   .then(res => {
+        //     console.log("Location updated", res.data);
+        //   })
+        //   .catch(err => {
+        //     console.log(err);
+        //   });
         // update the location into DB for every minute
         sleep(60000).then(() => {
           getLocationUpdate(supplierID, orderID);
