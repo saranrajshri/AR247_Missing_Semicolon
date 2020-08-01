@@ -43,3 +43,77 @@ export const isSupplierAuthenticated = () => {
   });
   return res;
 };
+
+/**
+ * @param {Object} supplierData
+ * @param {String} supplierID
+ * @requires {Object} Response Object
+ */
+
+export const updateSupplierDetails = (supplierData, supplierID) => {
+  var res = axios.post(`${constants.BASE_URL}/supplier/update/${supplierID}`, {
+    supplierData
+  });
+  return res;
+};
+
+/**
+ * @requires {Object} Response Object
+ */
+export const getSupplierMappings = () => {
+  var res = axios.get(`${constants.BASE_URL}/supplier/getMappings`);
+  return res;
+};
+
+// Product actions
+
+/**
+ * Add a new product to the collection
+ * @param {Object} productData
+ * @returns {Object} Response object
+ */
+export const addProduct = (productData) => {
+  var res = axios.post(
+    `${constants.BASE_URL}/supplier/product/add`,
+    productData
+  );
+  return res;
+};
+
+/**
+ * Update a product details
+ * @param {Object} productData
+ * @returns {Object} Response object
+ */
+export const updateProduct = (barCode, productData) => {
+  var res = axios.post(
+    `${constants.BASE_URL}/supplier/product/update/${barCode}`,
+    productData
+  );
+  return res;
+};
+
+/**
+ * Delete a product from the collection
+ * @param {String} productBarCode
+ * @param {String} supplierID
+ * @returns {Object} res
+ */
+export const deleteProduct = (productBarCode, supplierID) => {
+  var res = axios.post(
+    `${constants.BASE_URL}/supplier/product/delete/${productBarCode}/${supplierID}`
+  );
+  return res;
+};
+
+/**
+ * Get all products of the specified supplier
+ * @param {String} supplierID
+ * @returns {Array} List of product objects
+ */
+export const getProductsOfASupplier = (supplierID) => {
+  var res = axios.get(
+    `${constants.BASE_URL}/supplier/product/getProductsOfASupplier/${supplierID}`
+  );
+  return res;
+};
