@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Menu } from "semantic-ui-react";
+import IncomingOrders from "./Tabs/IncomingOrders/IncomingOrders";
 import Header from "../../components/Driver/Header/Header";
+import CurrentOrders from "./Tabs/CurrentOrders/CurrentOrders";
+import FinishedOrders from "./Tabs/FinishedOrders/FinishedOrders";
 import { DriverContext } from "../../Context/DriverContext";
 import { getOrdersOfDriver } from "../../actions/actions";
-import IncomingOrders from "./Tabs/IncomingOrders/IncomingOrders";
-import CurrentOrders from "./Tabs/CurrentOrders/CurrentOrders";
 
 const Driver = () => {
   const {
@@ -21,7 +22,7 @@ const Driver = () => {
   var mapping = {
     IncomingOrders: IncomingOrders,
     CurrentOrders: CurrentOrders,
-    // FinishedOrders: FinishedOrders
+    FinishedOrders: FinishedOrders
   };
   var Component = mapping[selectedComponent];
 
@@ -64,7 +65,14 @@ const Driver = () => {
           Current Orders
         </Menu.Item>
 
-        
+        <Menu.Item
+          className="driver-footer-item"
+          name="FinishedOrders"
+          active={activeItem === "FinishedOrders"}
+          onClick={handleItemClick}
+        >
+          Finished Orders
+        </Menu.Item>
       </Menu>
     </div>
   );

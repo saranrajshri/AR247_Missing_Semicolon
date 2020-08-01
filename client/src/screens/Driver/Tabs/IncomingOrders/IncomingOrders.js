@@ -50,6 +50,7 @@ const IncomingOrders = () => {
         });
       });
   };
+
   return (
     <div id="driver">
       {orders.map((order, index) =>
@@ -106,7 +107,7 @@ const IncomingOrders = () => {
                   <Button
                     primary
                     size={"mini"}
-                    //onClick={() => handleStart(order, index)}
+                    onClick={() => handleStart(order, index)}
                   >
                     START
                   </Button>
@@ -121,31 +122,3 @@ const IncomingOrders = () => {
 };
 
 export default IncomingOrders;
-
-const orderss = [{
-    isOrderDispatched : false,
-    isOrderAssigned : true,
-    tripData : {
-        pickUpLocationName: "Ramanathapuram",
-        dropLocationName: "Chennai",
-        baseTime: 987898,
-        distance: 100000
-    },
-    customerData: {
-        phoneNumber: 1234567890
-    }
-},
-{
-    isOrderDispatched : false,
-    isOrderAssigned : true,
-    tripData : {
-        pickUpLocationName: "Ramanathapuram",
-        dropLocationName: "Chennai",
-        baseTime: 987898,
-        distance: 100000
-    },
-    customerData: {
-        phoneNumber: 1234567890
-    }
-}, 
-];
