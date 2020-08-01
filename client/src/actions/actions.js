@@ -154,3 +154,43 @@ export const getDriversOfASupplier = (supplierID) => {
   );
   return res;
 };
+
+// Order Actions
+
+/**
+ * Get all the orders of the supplier
+ * @param {String} supplierID
+ * @returns {null} No response
+ */
+export const getOrdersOfASupplier = (supplierID) => {
+  var res = axios.get(
+    `${constants.BASE_URL}/supplier/order/getOrdersOfASupplier/${supplierID}`
+  );
+  return res;
+};
+
+/**
+ * Dispatch a order
+ * @param {String} orderID
+ * @param {Object} orderData
+ * @returns {Object} Response Object
+ */
+export const dispatchOrder = (orderID, orderData, supplierID) => {
+  var res = axios.post(
+    `${constants.BASE_URL}/supplier/order/dispatch/${orderID}/${supplierID}`,
+    orderData
+  );
+  return res;
+};
+
+/**
+ * Get live updates of overall orders of the supplier
+ * @param {String} supplierID
+ * @returns {Object} Response Object
+ */
+export const getLiveUpdates = (supplierID) => {
+  var res = axios.get(
+    `${constants.BASE_URL}/order/getLiveUpdates/${supplierID}`
+  );
+  return res;
+};
