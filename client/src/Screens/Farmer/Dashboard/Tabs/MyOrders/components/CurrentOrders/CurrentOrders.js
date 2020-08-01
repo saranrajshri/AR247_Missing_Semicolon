@@ -1,27 +1,9 @@
 import React from "react";
-import { Card, Icon, Image, GridColumn, GridRow } from "semantic-ui-react";
-import { useParams, useHistory } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowLeft,
-  faShoppingCart,
-  faRupeeSign
-} from "@fortawesome/free-solid-svg-icons";
-import { Button, Dropdown } from "semantic-ui-react";
+import { Card, Image, GridColumn, GridRow } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 
 const CurrentOrders = () => (
   <div>
-    <div id="farmer-header">
-      <div className="logo-bar">
-        <div className="logo-name">
-          <FontAwesomeIcon
-            icon={faArrowLeft}
-            className="icon"
-            // onClick={() => history.goBack()}
-          />
-        </div>
-      </div>
-    </div>
     <GridColumn>
       <GridRow style={{ display: "flex", justifyContent: "center" }}>
         <Card style={{ width: "90%", marginTop: "10%" }}>
