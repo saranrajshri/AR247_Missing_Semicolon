@@ -194,3 +194,96 @@ export const getLiveUpdates = (supplierID) => {
   );
   return res;
 };
+
+// ----------Customer Actions---------- //
+/**
+ * Register a new customer.
+ * @param {Object} customerData - Customer details for registration.
+ * @returns {Response} - Response object
+ */
+export const registerCustomer = (customerData) => {
+  var res = axios.post(`${constants.BASE_URL}/customer/create`, customerData);
+  return res;
+};
+
+/**
+ * Login a customer.
+ * @param {Object} credentials - Customer's login credentials.
+ * @returns {Response} - Response object
+ */
+export const loginCustomer = (credentials) => {
+  var res = axios.post(`${constants.BASE_URL}/customer/login`, credentials);
+  return res;
+};
+
+/**
+ * Check cutomer authentication and get customer data.
+ * @returns {Response} - Response object with customer data
+ */
+export const checkCustomerAuthentication = () => {
+  var res = axios.get(`${constants.BASE_URL}/customer/isAuthenticated`, {
+    headers: customerHeaders
+  });
+  return res;
+};
+
+/**
+ * Get all products objects
+ * @param {null}
+ * @returns {Response} - Response object
+ */
+export const getAllProducts = () => {
+  var res = axios.get(`${constants.BASE_URL}/customer/product/getAll`);
+  return res;
+};
+
+/**
+ * Adds a product to cart.
+ * @param {String} customerID - Customer's id
+ * @param {Object} productID - Object with product id
+ * @returns {Object} - User object with cart elements
+ */
+export const addItemToCart = (customerID, productID) => {
+  var res = axios.post(
+    `${constants.BASE_URL}/customer/addToCart/${customerID}`,
+    productID
+  );
+  return res;
+};
+
+/**
+ * Removes a product from cart.
+ * @param {String} customerID - Customer's id
+ * @param {Object} productID - Object with product id
+ * @returns {Object} - User object with cart elements
+ */
+export const removeItemFromCart = (customerID, productID) => {
+  var res = axios.post(
+    `${constants.BASE_URL}/customer/pullFromCart/${customerID}`,
+    productID
+  );
+  return res;
+};
+
+/**
+ * Gets details of products in cart.
+ * @param {Object} productsID - Object with products id in array.
+ * @returns {Array.<Object>} - Array with product details object
+ */
+export const getProductsInCart = (productsID) => {
+  var res = axios.post(
+    `${constants.BASE_URL}/customer/getProductsFromCart`,
+    productsID
+  );
+  return res;
+};
+
+/**
+ * Place order for a customer.
+ * @param {Object} orderData - Object with order details.
+ * @returns {Object} - Object with order receipt and details.
+ */
+export const placeOrder = (orderData) => {
+  var res = axios.post(`${constants.BASE_URL}/user/order/add`, orderData);
+  return res;
+};
