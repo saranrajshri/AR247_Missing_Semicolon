@@ -13,7 +13,67 @@ import { markAsDelivered } from "../../../../actions/actions";
 import { useToast } from "../../../../Context/ToastContext";
 
 const CurrentOrders = () => {
-  
+  const { orders, watchDriverPosition } = useContext(DriverContext);
+  const { addToast } = useToast();
+
+  const openGoogleMaps = (pickUpLocationName, dropLocationName) => {
+    const pickUpLocation = pickUpLocationName.replace(" ", "+");
+    const dropLocation = dropLocationName.replace(" ", "+");
+    const URL = `https://www.google.com/maps/dir/?api=1&origin=${pickUpLocation}&destination=${dropLocation}`;
+    window.open(URL, "_blank");
+  };
+
+  const sleep = (milliseconds) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
+
+  const handleDelivered = (orderID, supplierID) => {
+    markAsDelivered(orderID, supplierID)
+      .then((res) => {
+        addToast({
+          type: "success",
+          message: "Order Completed Successfully"
+        });
+        // Redirect to current orders page
+        sleep(3000).then(() => {
+          window.location.reload();
+        });
+      })
+      .catch((err) => {
+        addToast({
+          type: "negative",
+          message: err.response.data.error.message
+        });
+      });
+  };
+
+  const startLocationSharing = (order) => {
+    addToast({
+      type: "success",
+      message: "Location Sharing Started..!"
+    });
+
+    // redirect
+    sleep(3000).then(() => {
+      // start sharing the real time data of the driver
+      addToast({});
+      watchDriverPosition(order.supplierID, order.orderID);
+      // window.location.reload();
+    });
+  };
+
+  useEffect(() => {
+    const filteredOrders = orders.filter(
+      (order) => order.isOrderDispatched && order.isOrderDelivered === false
+    );
+    if (
+      filteredOrders.length !== 0 &&
+      filteredOrders[0].isOrderDispatched &&
+      filteredOrders[0].isOrderDelivered === false
+    ) {
+      startLocationSharing(filteredOrders[0]);
+    }
+  }, []);
   return (
     <div id="driver">
       {orders.map((order, index) => {
@@ -32,12 +92,12 @@ const CurrentOrders = () => {
                     <div className="float-right-container">
                       <Button
                         primary
-                        // onClick={() =>
-                        //   openGoogleMaps(
-                        //     order.tripData.pickUpLocationName,
-                        //     order.tripData.dropLocationName
-                        //   )
-                        // }
+                        onClick={() =>
+                          openGoogleMaps(
+                            order.tripData.pickUpLocationName,
+                            order.tripData.dropLocationName
+                          )
+                        }
                       >
                         <FontAwesomeIcon
                           icon={faMapMarkerAlt}
@@ -99,9 +159,9 @@ const CurrentOrders = () => {
                     <div className="float-right-container">
                       <Button
                         color="green"
-                        // onClick={() =>
-                        //   handleDelivered(order.orderID, order.supplierID)
-                        // }
+                        onClick={() =>
+                          handleDelivered(order.orderID, order.supplierID)
+                        }
                       >
                         <FontAwesomeIcon
                           icon={faCheckCircle}
@@ -122,53 +182,3 @@ const CurrentOrders = () => {
 };
 
 export default CurrentOrders;
-
-
-const orders = [{
-    orderID: "OR-1",
-    isOrderDispatched : true,
-    isOrderAssigned : true,
-    isOrderDelivered : false,
-    tripData : {
-        pickUpLocationName: "Ramanathapuram",
-        dropLocationName: "Chennai",
-        baseTime: 987898,
-        distance: 100000
-    },
-    customerData: {
-        phoneNumber: 1234567890
-    },
-    orderData : {
-        products : [{
-            pp : "dlfjdk"
-        },
-        {
-            pp : "dlfjdk"
-        }],
-        orderPrice : 1123
-    }
-},
-{
-    orderID: "OR-1",
-    isOrderDispatched : true,
-    isOrderAssigned : true,
-    isOrderDelivered : false,
-    tripData : {
-        pickUpLocationName: "Ramanathapuram",
-        dropLocationName: "Chennai",
-        baseTime: 987898,
-        distance: 100000
-    },
-    customerData: {
-        phoneNumber: 1234567890
-    },
-    orderData : {
-        products : [{
-            pp : "dlfjdk"
-        },
-        {
-            pp : "dlfjdk"
-        }],
-        orderPrice : 1123
-    }
-}];

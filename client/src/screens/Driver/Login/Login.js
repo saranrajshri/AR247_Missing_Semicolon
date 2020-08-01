@@ -11,11 +11,11 @@ import { loginDriver } from "../../../actions/actions";
 const DriverLogin = () => {
   const [credentials, setCredentials] = useState({
     phoneNumber: "",
-    password: "",
+    password: ""
   });
   const [errors, setErrors] = useState({
     phoneNumber: null,
-    password: null,
+    password: null
   });
   const { setFullScreenLoader, setDriverData } = useContext(DriverContext);
   const history = useHistory();
@@ -39,7 +39,7 @@ const DriverLogin = () => {
         setErrors({
           ...errors,
           phoneNumber: "Phone number is required.",
-          password: "Password is required.",
+          password: "Password is required."
         })
       );
       return;
@@ -67,7 +67,7 @@ const DriverLogin = () => {
             setErrors({
               ...errors,
               phoneNumber: err.response.data.error.message,
-              password: err.response.data.error.message,
+              password: err.response.data.error.message
             })
           );
         });
