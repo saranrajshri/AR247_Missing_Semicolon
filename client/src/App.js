@@ -7,12 +7,16 @@ import FarmerContextProvider from "./Context/FarmerContext";
 import DriverContextProvider from "./Context/DriverContext";
 import ToastProvider from "./Context/ToastContext";
 
+import Routes from "./Routes";
+
 const App = () => {
   return (
     <ContextProvider>
       <FarmerContextProvider>
         <DriverContextProvider>
-          <ToastProvider></ToastProvider>
+          <ToastProvider>
+            <Routes />
+          </ToastProvider>
         </DriverContextProvider>
       </FarmerContextProvider>
     </ContextProvider>
