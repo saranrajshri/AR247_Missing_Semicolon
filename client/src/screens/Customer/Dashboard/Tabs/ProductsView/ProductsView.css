@@ -1,0 +1,133 @@
+.body-wrapper {
+  margin: 4px;
+}
+.products-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.product-wrapper {
+  flex-basis: 49.5%;
+  height: 270px;
+  box-shadow: 14px 14px 32px 0 rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  margin-bottom: 5px;
+  margin-right: 1px;
+}
+
+.product-img {
+  height: 180px;
+  width: 100%;
+}
+
+.product-info {
+  height: 90px;
+  width: 100%;
+  background-color: #ffffff;
+  text-overflow: hidden;
+}
+
+.product-text {
+  height: 90px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.product-text h1 {
+  margin: 0 0 2px 10px;
+  padding-top: 10px;
+  font-size: 18px;
+  color: #474747;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-text h2 {
+  margin: 0 0 2px 10px;
+  font-size: 13px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #969696;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.product-text p {
+  margin: 0 0 0 10px;
+  font-size: 17px;
+  font-weight: lighter;
+  color: #474747;
+}
+
+.product-text span {
+  padding-left: 5px;
+  display: inline-block;
+  height: 20px;
+  font-size: 18px;
+}
+
+.product-text .product-kg {
+  font-size: 15px;
+  color: #969696;
+}
+
+@media only screen and (min-width: 600px) {
+  .products-grid {
+    margin: 20px 50px;
+  }
+  .product-wrapper {
+    flex-basis: 30%;
+    height: 300px;
+  }
+  .product-img {
+    height: 200px;
+  }
+  .product-img img {
+    height: 200px;
+  }
+  .product-info {
+    height: 100px;
+  }
+  .product-text {
+    height: 100%;
+  }
+  .product-text h1 {
+    margin: 0 0 5px 10px;
+  }
+  .product-text h2 {
+    margin: 0 0 5px 10px;
+  }
+}
+
+@media only screen and (min-width: 968px) {
+  .products-grid {
+    margin: 20px 50px;
+  }
+  .product-wrapper {
+    flex-basis: 20%;
+    height: 300px;
+  }
+  .product-img {
+    height: 200px;
+  }
+  .product-img img {
+    height: 200px;
+  }
+  .product-info {
+    height: 100px;
+  }
+  .product-text {
+    height: 100%;
+  }
+  .product-text h1 {
+    margin: 0 0 5px 10px;
+  }
+  .product-text h2 {
+    margin: 0 0 5px 10px;
+  }
+}

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 import { FarmerContext } from "./Context/FarmerContext";
 import { DriverContext } from "./Context/DriverContext";
 
@@ -24,6 +23,7 @@ const Routes = () => {
           {/* <PrivateRoute path="/driver/home" exact component={Driver} />
           <Route path="/driver/login" exact component={DriverLogin} /> */}
           {/* Farmer routes */}
+
           {/* <Route path="/farmer/login" exact component={Signin} />
           <Route path="/farmer/register" exact component={Register} />
           <Route path="/farmer/home" exact component={FarmerHome} />
