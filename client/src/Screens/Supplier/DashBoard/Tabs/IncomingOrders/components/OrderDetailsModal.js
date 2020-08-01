@@ -117,6 +117,12 @@ const OrderDetailsModal = (props) => {
               <p className="ship-label">trip info</p>
               <div className="ship-info">
                 <p>
+                  From: <span>{order.restTime.endTime.substring(0, 7)}</span>
+                </p>
+                <p>
+                  Time: <span>{order.restTime.startTime.substring(0, 7)}</span>
+                </p>
+                <p>
                   Rest Time:{" "}
                   <span>
                     {(
