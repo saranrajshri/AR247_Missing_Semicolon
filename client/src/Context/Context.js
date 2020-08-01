@@ -3,7 +3,7 @@ import React, { useState, createContext } from "react";
 export const Context = createContext();
 
 // Global state provider
-const ContextProvider = props => {
+const ContextProvider = (props) => {
   const [selectedComponent, setSelectedComponent] = useState("ManageOrders");
   const [supplierData, setSupplierData] = useState({});
   const [isFullScreenLoaderVisible, setFullScreenLoader] = useState(false);

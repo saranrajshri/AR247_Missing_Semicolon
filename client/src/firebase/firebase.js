@@ -8,7 +8,7 @@ const config = {
   storageBucket: "smartindiahackathon2020.appspot.com",
   messagingSenderId: "411359624710",
   appId: "1:411359624710:web:296417ea43993983c04d87",
-  measurementId: "G-JGVDXHXYF7"
+  measurementId: "G-JGVDXHXYF7",
 };
 
 firebase.initializeApp(config);

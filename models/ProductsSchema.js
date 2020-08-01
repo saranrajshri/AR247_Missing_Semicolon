@@ -4,32 +4,32 @@ const Schema = mongoose.Schema;
 const Product = new Schema({
   barCode: {
     type: String,
-    required: true
+    required: true,
   },
   productName: {
     type: String,
-    required: true
+    required: true,
   },
   productPrice: {
     type: Number,
-    required: true
+    required: true,
   },
   availableQuantity: {
     type: Number,
-    required: true
+    required: true,
   },
   supplierID: {
     type: String,
-    required: true
+    required: true,
   },
   imageURL: {
     type: String,
-    required: true
+    required: true,
   },
   isHidden: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 const product = mongoose.model("product", Product);

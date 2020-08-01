@@ -1,0 +1,12 @@
+.search-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+.search-placeholder {
+  font-size: 18px;
+  padding-right: 10px;
+}
+.table-wrapper {
+  padding-top: 15px;
+}

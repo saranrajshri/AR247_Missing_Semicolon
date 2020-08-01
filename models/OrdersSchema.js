@@ -4,42 +4,42 @@ const Schema = mongoose.Schema;
 const OrderSchema = new Schema({
   orderID: {
     type: String,
-    required: true
+    required: true,
   },
   customerData: {
     type: {},
-    required: true
+    required: true,
   },
   driverID: {
-    type: String
+    type: String,
   },
   supplierID: {
     type: String,
-    required: true
+    required: true,
   },
   tripData: {
     type: {},
-    required: true
+    required: true,
   },
   orderData: {
     type: {},
-    required: true
+    required: true,
   },
   isOrderAssigned: {
     type: Boolean,
-    default: false
+    default: false,
   },
   isOrderDispatched: {
     type: Boolean,
-    default: false
+    default: false,
   },
   isOrderDelivered: {
     type: Boolean,
-    default: false
+    default: false,
   },
   currentStatus: {
-    type: {}
-  }
+    type: {},
+  },
 });
 
 var orders = mongoose.model("orders", OrderSchema);

@@ -1,16 +1,16 @@
 {
-    "development": {
-        "MONGO_URI": "mongodb://127.0.0.1:27017/sih",
-        "secret": "abc",
-        "HERE_MAPS_API_KEY": "Omfb3D_6gnrF9h7r_TsQAyFJrj47fZcbqIeN41Uxxxw",
-        "HERE_MAPS_APP_ID": "xPIcFc8xn5PLiheKwn5p",
-        "HERE_MAPS_APP_CODE": "8f8NlzUfaHYVJuitDFoDgA"
-    },
-    "production": {
-        "MONGO_URI": "mongodb+srv://saran123:saran123@cluster0.i6air.mongodb.net/<dbname>?retryWrites=true&w=majority",
-        "secret": "abc",
-        "HERE_MAPS_API_KEY": "Omfb3D_6gnrF9h7r_TsQAyFJrj47fZcbqIeN41Uxxxw",
-        "HERE_MAPS_APP_ID": "xPIcFc8xn5PLiheKwn5p",
-        "HERE_MAPS_APP_CODE": "8f8NlzUfaHYVJuitDFoDgA"
-      }
-  }
+  "development": {
+      "MONGO_URI": "mongodb://127.0.0.1:27017/sih",
+      "secret": "abc",
+      "HERE_MAPS_API_KEY": "Omfb3D_6gnrF9h7r_TsQAyFJrj47fZcbqIeN41Uxxxw",
+      "HERE_MAPS_APP_ID": "xPIcFc8xn5PLiheKwn5p",
+      "HERE_MAPS_APP_CODE": "8f8NlzUfaHYVJuitDFoDgA"
+  },
+  "production": {
+      "MONGO_URI": "mongodb+srv://saran123:saran123@cluster0.i6air.mongodb.net/<dbname>?retryWrites=true&w=majority",
+      "secret": "abc",
+      "HERE_MAPS_API_KEY": "Omfb3D_6gnrF9h7r_TsQAyFJrj47fZcbqIeN41Uxxxw",
+      "HERE_MAPS_APP_ID": "xPIcFc8xn5PLiheKwn5p",
+      "HERE_MAPS_APP_CODE": "8f8NlzUfaHYVJuitDFoDgA"
+    }
+}

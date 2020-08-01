@@ -3,7 +3,7 @@ import React, { useState, createContext } from "react";
 export const FarmerContext = createContext();
 
 // Global state provider
-const FarmerContextProvider = props => {
+const FarmerContextProvider = (props) => {
   const [selectedComponent, setSelectedComponent] = useState("ProductsView");
   const [farmerData, setFarmerData] = useState({});
   const [isFullScreenLoaderVisible, setFullScreenLoader] = useState(false);

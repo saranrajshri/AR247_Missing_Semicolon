@@ -4,26 +4,26 @@ const Schema = mongoose.Schema;
 
 const VerifiedSupplierSchema = new Schema({
   supplierName: {
-    type: String
+    type: String,
   },
   designation: {
-    type: String
+    type: String,
   },
   agencyName: {
     type: String,
-    required: true
+    required: true,
   },
   address: {
     type: String,
-    required: true
+    required: true,
   },
   phoneNumber: {
     type: String,
-    required: true
+    required: true,
   },
   faxNumber: {
-    type: String
-  }
+    type: String,
+  },
 });
 
 const verifiedSupplier = mongoose.model(

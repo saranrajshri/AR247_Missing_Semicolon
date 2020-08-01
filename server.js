@@ -18,7 +18,6 @@ io.on("connection", client => {
   console.log("Client Connected");
   app.set("client", client);
 });
-
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
