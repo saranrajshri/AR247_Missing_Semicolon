@@ -59,6 +59,13 @@ const AssignDrivers = () => {
     setDriverPrice(e.target.value);
   };
 
+  const updateCheckPoints = (checkpoints) => {
+    setModal(false);
+    var tempTripDetails = tripDetails;
+    tempTripDetails.checkpoints = checkpoints;
+    setTripDetails(tempTripDetails);
+  };
+
 
   // update the driver data to the state
   const handleSelect = (e, { result }) => {
@@ -250,11 +257,25 @@ const AssignDrivers = () => {
             </div>
           </div>
         </div>
-        {/*TODO Right Column */}
+        {/* Right Column */}
+        <div className="grid-item">
+          <div className="card">
+            <div className="card-content">
+              <ShowRouteMap
+                pickUpCoordinates={tripDetails.tripData.pickUpCoordinates}
+                dropCoordinates={tripDetails.tripData.dropCoordinates}
+              />
+            </div>
+          </div>
+        </div>
         
       </div>
 
       {/* TODO Add Checkpoints Modal */}
+      <AddCheckPointsModal
+        isOpen={isModalOpen}
+        handleClose={(checkpoints) => updateCheckPoints(checkpoints)}
+      />
      
     </div>
   );
