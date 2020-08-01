@@ -1,5 +1,6 @@
 const Supplier = require("../../models/SupplierSchema");
 const VerifiedSupplier = require("../../models/VerifiedSupplierSchema");
+const Notifications = require("../../models/NotificationsSchema");
 
 const crypto = require("crypto");
 const createError = require("http-errors");
@@ -198,6 +199,21 @@ supplier.update = async (req, res, next) => {
     );
     updatedSupplier.password = undefined;
     res.send(updatedSupplier);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// get notifications
+supplier.getNotifications = async (req, res, next) => {
+  try {
+    var client = req.app.get("client");
+    console.log(req.body);
+    const notification = await Notifications.find({
+      supplierID: req.body.supplierID
+    });
+    client.emit("notifications", notification);
+    res.send(notification);
   } catch (err) {
     next(err);
   }

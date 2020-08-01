@@ -230,6 +230,13 @@ export const getOrdersOfASupplier = supplierID => {
   return res;
 };
 
+export const getNotificationsOfASupplier = supplierID => {
+  var res = axios.post(`${constants.BASE_URL}/supplier/getNotification`, {
+    supplierID
+  });
+  return res;
+};
+
 /**
  * Dispatch a order
  * @param {String} orderID
