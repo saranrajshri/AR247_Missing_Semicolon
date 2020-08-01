@@ -240,7 +240,7 @@ order.markAsPicked = async (req, res, next) => {
   try {
     const order = await Order.findOneAndUpdate(
       { isOrderAssigned: true, orderID: req.params.orderID },
-      { isOrderDispatched: true }
+      { orderPickedTime: new Date(), isOrderDispatched: true }
     );
     const driver = await Driver.findOneAndUpdate(
       { driverID: req.params.driverID },
@@ -267,7 +267,7 @@ order.markAsCompleted = async (req, res, next) => {
         isOrderDispatched: true,
         orderID: req.params.orderID
       },
-      { isOrderDelivered: true }
+      { orderDeliveredTime: new Date(), isOrderDelivered: true }
     );
     if (!order) {
       throw createError(422, "Order is not assigned/ dispatched");

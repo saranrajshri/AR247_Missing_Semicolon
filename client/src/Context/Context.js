@@ -3,7 +3,7 @@ import React, { useState, createContext } from "react";
 export const Context = createContext();
 
 // Global state provider
-const ContextProvider = (props) => {
+const ContextProvider = props => {
   const [selectedComponent, setSelectedComponent] = useState("ManageOrders");
   const [supplierData, setSupplierData] = useState({});
   const [isFullScreenLoaderVisible, setFullScreenLoader] = useState(false);
@@ -19,6 +19,7 @@ const ContextProvider = (props) => {
   const [products, setProducts] = useState([]);
   const [drivers, setDrivers] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [notifications, setNotifications] = useState([]);
   const [liveUpdates, setLiveUpdates] = useState({
     allVehicles: 0,
     onMove: 0
@@ -30,6 +31,8 @@ const ContextProvider = (props) => {
         setSelectedComponent,
         isFullScreenLoaderVisible,
         setFullScreenLoader,
+        notifications,
+        setNotifications,
         liveUpdates,
         setLiveUpdates,
         orderToBeDispatched,

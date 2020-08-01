@@ -24,7 +24,8 @@ router
   .post("/supplier/login", supplier.login)
   .get("/supplier/isAuthenticated", supplier.isSupplierAuthenticated)
   .get("/supplier/getMappings", supplier.getMappings)
-  .post("/supplier/update/:supplierID", supplier.update);
+  .post("/supplier/update/:supplierID", supplier.update)
+  .post("/supplier/getNotification", supplier.getNotifications);
 
 // Product Routes
 router
@@ -47,6 +48,7 @@ router
   )
   .get("/driver/isAuthenticated", driver.isDriverAuthenticated)
   .get("/driver/getAllOrders/:driverID", driver.getAllOrders)
+  .post("/driver/updateNotification", driver.updateNotifications)
   .post("/driver/login", driver.login);
 
 // Order Routes

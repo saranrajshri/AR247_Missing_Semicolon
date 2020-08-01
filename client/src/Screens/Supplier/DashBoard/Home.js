@@ -29,7 +29,8 @@ import {
   getDriversOfASupplier,
   getOrdersOfASupplier,
   isSupplierAuthenticated,
-  getLiveUpdates
+  getLiveUpdates,
+  getNotificationsOfASupplier
 } from "../../../actions/actions";
 
 import socketIOClient from "socket.io-client";
@@ -51,6 +52,7 @@ const Home = () => {
     setOrders,
     setFullScreenLoader,
     setSupplierData,
+    setNotifications,
     setLiveUpdates
   } = useContext(Context);
 
@@ -80,6 +82,11 @@ const Home = () => {
     socket.on("orders", orders => {
       // setOrders(orders);
     });
+    socket.on("notifications", notifications => {
+      // setOrders(orders);
+      setNotifications(notifications);
+      // console.log(notifications);
+    });
     socket.on("liveUpdates", liveUpdates => {
       setLiveUpdates(liveUpdates);
     });
@@ -93,6 +100,9 @@ const Home = () => {
         setSupplierData(res.data);
         getProductsOfASupplier(res.data._id);
         getDriversOfASupplier(res.data._id);
+        getNotificationsOfASupplier(res.data._id).then(res => {
+          console.log(res.data);
+        });
         getOrdersOfASupplier(res.data._id).then(res => {
           setOrders(res.data);
         });
