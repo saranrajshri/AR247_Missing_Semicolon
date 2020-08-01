@@ -27,44 +27,18 @@ import {
   checkCustomerAuthentication,
   checkDriverAuthentication
 } from "./actions/actions";
+
 // Route function containing all routes for the app.
 const Routes = () => {
   const { setFarmerData } = useContext(FarmerContext);
   const { setDriverData } = useContext(DriverContext);
 
-  //   useEffect(() => {
-  //     const checkCustomer = () => {
-  //       checkCustomerAuthentication()
-  //         .then(res => {
-  //           // console.log(res.data);
-  //           setFarmerData(res.data);
-  //         })
-  //         .catch(err => {
-  //           console.log(err);
-  //           setFarmerData({});
-  //           localStorage.removeItem("CUSTOMER_AUTH_TOKEN");
-  //         });
-  //     };
-  //     const checkDriver = () => {
-  //       checkDriverAuthentication()
-  //         .then(res => {
-  //           setDriverData(res.data);
-  //         })
-  //         .catch(err => {
-  //           console.log(err);
-  //           setDriverData({});
-  //           localStorage.removeItem("DRIVER_AUTH_TOKEN");
-  //         });
-  //     };
-
-  //     checkCustomer();
-  //     checkDriver();
-  //   }, []);
-
   return (
     <div>
       <Router>
         <Switch>
+          {/* TO DO */}
+
           {/* <Route path="/" exact component={Landing} /> */}
           {/* Supplier routes */}
           {/* <Route path="/supplier/home" exact component={Home} />
