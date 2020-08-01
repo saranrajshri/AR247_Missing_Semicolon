@@ -8,12 +8,26 @@ const config = require("./config/database.json")[
   process.env.NODE_ENV || "development"
 ];
 const path = require("path");
+const morgan = require("morgan");
 
 const routes = require("./routes/index");
 
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
+
+// log only for 4xx and 5xx errors
+app.use(
+  morgan("dev", {
+    skip: function(req, res) {
+      var result = {};
+      result.body = req.body;
+      result.params = req.params;
+      console.log(result);
+      return res.statusCode < 400;
+    }
+  })
+);
 
 // routes
 app.use("/api/v3", routes);
