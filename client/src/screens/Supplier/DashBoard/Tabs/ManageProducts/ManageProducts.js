@@ -3,6 +3,8 @@ import React, { useState, useContext } from "react";
 
 import { Search } from "semantic-ui-react";
 import ProductsTable from "./components/ProductsTable";
+import EditProductModal from "./components/EditProductModal";
+
 
 import { Context } from "../../../../../Context/Context";
 import { deleteProduct, updateProduct } from "../../../../../actions/actions";
