@@ -64,14 +64,7 @@ const Driver = () => {
           Current Orders
         </Menu.Item>
 
-        <Menu.Item
-          className="driver-footer-item"
-          name="FinishedOrders"
-          active={activeItem === "FinishedOrders"}
-          onClick={handleItemClick}
-        >
-          Finished Orders
-        </Menu.Item>
+        
       </Menu>
     </div>
   );
