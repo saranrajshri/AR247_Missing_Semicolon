@@ -287,3 +287,74 @@ export const placeOrder = (orderData) => {
   var res = axios.post(`${constants.BASE_URL}/user/order/add`, orderData);
   return res;
 };
+
+// ---------- Driver actions ---------- //
+/**
+ * Login for driver.
+ * @param {Object} credentials - Driver credentials for login.
+ * @return {Object} - Driver data object.
+ */
+export const loginDriver = (credentials) => {
+  var res = axios.post(`${constants.BASE_URL}/driver/login`, credentials);
+  return res;
+};
+
+/**
+ * Check driver authentication and get driver data.
+ * @returns {Response} - Response object with driver data
+ */
+export const checkDriverAuthentication = () => {
+  var res = axios.get(`${constants.BASE_URL}/driver/isAuthenticated`, {
+    headers: driverHeaders
+  });
+  return res;
+};
+
+/**
+ * Get the orders of the specified driver
+ * @param {String} driverID
+ */
+export const getOrdersOfDriver = (driverID) => {
+  var res = axios.get(`${constants.BASE_URL}/driver/getAllOrders/${driverID}`);
+  return res;
+};
+
+/**
+ * Update a order as pickedup
+ * @param {String} orderID
+ * @param {String} supplierID
+ * @returns {Object} Response Object
+ */
+export const markAsPicked = (driverID, supplierID, orderID) => {
+  var res = axios.post(
+    `${constants.BASE_URL}/driver/order/markAsPicked/${driverID}/${supplierID}/${orderID}`
+  );
+  return res;
+};
+
+/**
+ * Update a order as delivered
+ * @param {String} orderID
+ * @param {String} supplierID
+ * @returns {Object} Response Object
+ */
+export const markAsDelivered = (orderID, supplierID) => {
+  var res = axios.post(
+    `${constants.BASE_URL}/driver/order/markAsCompleted/${orderID}/${supplierID}`
+  );
+  return res;
+};
+
+/**
+ * Update the current status of the order
+ * @param {String} supplierID
+ * @param {String} orderID
+ * @returns {Object} Response Object
+ */
+export const updateCurrentStatusOfOrder = (supplierID, orderID, data) => {
+  var res = axios.post(
+    `${constants.BASE_URL}/driver/order/updateCurrentStatus/${orderID}/${supplierID}`,
+    data
+  );
+  return res;
+};
