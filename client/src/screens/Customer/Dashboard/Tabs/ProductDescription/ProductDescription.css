@@ -1,0 +1,146 @@
+#product-description {
+  width: 100vw;
+  height: auto;
+}
+
+.product-information {
+  margin: 5px auto;
+}
+
+.product-details {
+  margin: 10px 0 50px 10px;
+}
+.product-details h1 {
+  margin: 0 0 5px 10px;
+  padding-top: 10px;
+  font-size: 24px;
+  color: #474747;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-details h2 {
+  margin: 0 0 10px 10px;
+  font-size: 13px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #969696;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.product-details p {
+  margin: 0 0 10px 10px;
+  font-size: 25px;
+  font-weight: lighter;
+  color: #474747;
+}
+
+.product-details span {
+  padding-left: 5px;
+  display: inline-block;
+  height: 20px;
+  font-size: 25px;
+}
+
+.product-details .product-kg {
+  font-size: 15px;
+  color: #969696;
+}
+
+.product-details .description-label {
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-family: openSansSemiBold;
+  font-weight: 500;
+}
+
+.product-details .description {
+  font-size: 16px;
+  text-indent: 30px;
+}
+
+.fixed-button {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+}
+
+.add-to-cart {
+  width: 50vw;
+  height: 50px;
+}
+
+.buy-now {
+  width: 50vw;
+  height: 50px;
+}
+
+@media only screen and (min-width: 768px) {
+  .product-information {
+    margin: 20px 10px 10px 20px;
+  }
+
+  .product-information .product-image {
+    float: left;
+    margin-top: 10px;
+  }
+
+  .product-information img {
+    width: 400px;
+  }
+
+  .product-details {
+    margin: 10px 0 50px 30px;
+    float: left;
+  }
+  .product-details h1 {
+    margin: 0 0 5px 10px;
+    padding-top: 10px;
+    font-size: 30px;
+  }
+
+  .product-details h2 {
+    margin: 0 0 15px 10px;
+    font-size: 15px;
+  }
+
+  .product-details p {
+    margin: 0 0 20px 10px;
+    font-size: 28px;
+    font-weight: lighter;
+  }
+
+  .product-details span {
+    padding-left: 5px;
+    display: inline-block;
+    height: 25px;
+    font-size: 28px;
+  }
+
+  .product-details .description {
+    text-overflow: clip;
+    white-space: pre-wrap;
+  }
+
+  .fixed-button {
+    float: left;
+    top: 430px;
+    left: 450px;
+    display: flex;
+    flex-direction: row;
+  }
+  .add-to-cart {
+    width: 200px;
+  }
+
+  .buy-now {
+    width: 200px;
+  }
+}
