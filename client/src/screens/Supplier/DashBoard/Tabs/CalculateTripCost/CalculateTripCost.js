@@ -37,7 +37,71 @@ const CalculateTripCost = () => {
   const [tripDetails, setTripDetails] = useState({});
   const { setFullScreenLoader } = useContext(Context);
 
- 
+  // show suggestion box for the pickup field
+  const handleFromLocationChange = async (e) => {
+    setFromLocationName(e.target.value);
+    // get suggestions from the API
+    getPlacesSuggestions(e.target.value).then((res) => {
+      if (res.status) {
+        setFromSuggestions(res.data);
+        setFromSuggestionBox(true);
+      }
+    });
+  };
+
+  // show suggestion box for the destination field
+  const handleToLocationChange = async (e) => {
+    setToLocationName(e.target.value);
+    // get suggestions from the API
+    getPlacesSuggestions(e.target.value).then((res) => {
+      if (res.status) {
+        setToSuggestions(res.data);
+        setToSuggestionBox(true);
+      }
+    });
+  };
+
+  // get the latitude and longitude of the given placename
+  const getCoordinates = async (placeName, fieldName) => {
+    geoCoder(placeName).then((res) => {
+      if (res.status) {
+        if (fieldName === "from") {
+          setFromLocationGeoAddress(res.data);
+          // close the suggestion box
+          setFromSuggestionBox(false);
+          setFromLocationName(placeName);
+        } else {
+          setToLocationGeoAddress(res.data);
+          // close the suggestion box
+          setToSuggestionBox(false);
+          setToLocationName(placeName);
+        }
+      }
+    });
+  };
+
+  // handle text input change
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: parseInt(e.target.value) });
+  };
+
+  // Submit
+  const submit = () => {
+    var dataToBeSent = {
+      vechileCost: data.vechileCost,
+      driverCost: data.driverCost,
+      fromCoordinates: fromLocationGeoAddress,
+      toCoordinates: toLocationGeoAddress,
+    };
+
+    setFullScreenLoader(true); // show loader
+
+    // get trip details
+    calculateTripDetails(dataToBeSent).then((res) => {
+      setTripDetails(res);
+      setFullScreenLoader(false); //hide the loader
+    });
+  };
   return (
     <div className="p-5">
       <div className="title text-dark">Calculate Trip Cost</div>
