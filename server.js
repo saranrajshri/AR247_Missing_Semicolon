@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
+var io = require("socket.io")(server);
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -11,6 +12,12 @@ const path = require("path");
 const morgan = require("morgan");
 
 const routes = require("./routes/index");
+
+// Socket io
+io.on("connection", client => {
+  console.log("Client Connected");
+  app.set("client", client);
+});
 
 // Middleware
 app.use(bodyParser.json());
