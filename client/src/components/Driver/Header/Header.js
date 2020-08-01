@@ -9,9 +9,10 @@ import { Helmet } from "react-helmet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { Context } from "../../../Context/Context";
+import { DriverContext } from "../../../Context/DriverContext";
 
 const Header = () => {
-  const { selectedComponent } = useContext(Context);
+  const { selectedComponent } = useContext(DriverContext);
   return (
     <div className="">
       {/* React Helmet (for the changing the page title dynamically)*/}

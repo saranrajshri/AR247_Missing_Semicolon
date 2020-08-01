@@ -8,6 +8,48 @@ import { markAsPicked } from "../../../../actions/actions";
 import { useToast } from "../../../../Context/ToastContext";
 
 const IncomingOrders = () => {
+  const {
+    orders,
+    setOrders,
+    setSelectedComponent,
+    watchDriverPosition
+  } = useContext(DriverContext);
+  const { addToast } = useToast();
+
+  const sleep = (milliseconds) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
+
+  // Start the journey of the driver
+  const handleStart = (order, index) => {
+    markAsPicked(order.driverID, order.supplierID, order.orderID)
+      .then((res) => {
+        // update in the context
+        const tempOrders = orders;
+        tempOrders[index].isOrderDispatched = true;
+        setOrders(tempOrders);
+
+        addToast({
+          type: "success",
+          message: "Order Picked Successfully!."
+        });
+
+        // redirect
+        sleep(3000).then(() => {
+          // start sharing the real time data of the driver
+          addToast({});
+          watchDriverPosition(order.supplierID, order.orderID);
+          // window.location.reload();
+          setSelectedComponent("CurrentOrders");
+        });
+      })
+      .catch((err) => {
+        addToast({
+          type: "danger",
+          message: "Failed to update details!."
+        });
+      });
+  };
 
   return (
     <div id="driver">
@@ -65,7 +107,7 @@ const IncomingOrders = () => {
                   <Button
                     primary
                     size={"mini"}
-                    //onClick={() => handleStart(order, index)}
+                    onClick={() => handleStart(order, index)}
                   >
                     START
                   </Button>
@@ -80,31 +122,3 @@ const IncomingOrders = () => {
 };
 
 export default IncomingOrders;
-
-const orders = [{
-    isOrderDispatched : false,
-    isOrderAssigned : true,
-    tripData : {
-        pickUpLocationName: "Ramanathapuram",
-        dropLocationName: "Chennai",
-        baseTime: 987898,
-        distance: 100000
-    },
-    customerData: {
-        phoneNumber: 1234567890
-    }
-},
-{
-    isOrderDispatched : false,
-    isOrderAssigned : true,
-    tripData : {
-        pickUpLocationName: "Ramanathapuram",
-        dropLocationName: "Chennai",
-        baseTime: 987898,
-        distance: 100000
-    },
-    customerData: {
-        phoneNumber: 1234567890
-    }
-}, 
-];
