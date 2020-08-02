@@ -1,4 +1,4 @@
-# Implementation and tracking of certified jute seeds
+# Implementation and tracking of certified jute seeds packaging from suppliers to jute farmers in India.
 
 ![https://img.shields.io/badge/build-passing-brightgreen](https://img.shields.io/badge/build-passing-brightgreen) ![https://img.shields.io/badge/code%20quality-A-brightgreen](https://img.shields.io/badge/code%20quality-A-brightgreen)
 
