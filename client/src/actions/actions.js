@@ -345,6 +345,10 @@ export const placeOrder = orderData => {
 };
 
 // ---------- Driver actions ---------- //
+export const triggerDriverSMS = () => {
+  var res = axios.post(`${constants.BASE_URL}/order/triggerDriverSMS`, {});
+  return res;
+};
 export const updateNotification = data => {
   var res = axios.post(`${constants.BASE_URL}/driver/updateNotification`, data);
   return res;

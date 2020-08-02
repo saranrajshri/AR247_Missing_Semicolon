@@ -13,7 +13,8 @@ import {
 import { DriverContext } from "../../../../Context/DriverContext";
 import {
   markAsDelivered,
-  updateNotification
+  updateNotification,
+  triggerDriverSMS
 } from "../../../../actions/actions";
 import { useToast } from "../../../../Context/ToastContext";
 
@@ -116,7 +117,10 @@ const CurrentOrders = () => {
     ) {
       startLocationSharing(filteredOrders[0]);
       if (filteredOrders[0].isNear) {
-        sleep(4000).then(() => {
+        sleep(3000).then(() => {
+          // triggerDriverSMS().then(() => {
+          //   console.log("SMS Sent");
+          // });
           addToast({
             type: "success",
             message: "One SMS received....Check your mobile inbox"
