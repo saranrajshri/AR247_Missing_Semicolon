@@ -6,7 +6,7 @@ import CalculateTripCost from "./CalculateTripCost/CalculateTripCost";
 import AssignDrivers from "./AssignDrivers/AssignDriver";
 import IncomingOrders from "./IncomingOrders/IncomingOrders";
 import Settings from "./Settings/Settings";
-
+import Notifications from "./Notifications/Notifications";
 export {
   ManageOrders,
   ManageProducts,
@@ -16,4 +16,5 @@ export {
   AssignDrivers,
   IncomingOrders,
   Settings,
+  Notifications
 };
