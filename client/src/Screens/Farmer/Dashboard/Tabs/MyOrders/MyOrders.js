@@ -9,7 +9,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const MyOrders = () => {
   const history = useHistory();
-  const [activeItem, setActiveItem] = useState("currentOrders");
+  const [activeItem, setActiveItem] = useState("completedOrders");
 
   const handleItemClick = (e, { name }) => {
     setActiveItem(name);
