@@ -13,7 +13,11 @@ const AddCertfiedSeeds = () => {
     certificateNumber: "",
     tagNumber: "",
     issuedAt: "",
-    expiresAt: ""
+    expiresAt: "",
+    producerName: "",
+    producerContact: "",
+    producerAddress: "",
+    quantity: 0
   });
   const { setAlert, setFullScreenLoader, supplierData } = useContext(Context);
 
@@ -26,7 +30,11 @@ const AddCertfiedSeeds = () => {
       certificateNumber: "",
       tagNumber: "",
       issuedAt: "",
-      expiresAt: ""
+      expiresAt: "",
+      producerName: "",
+      producerContact: "",
+      producerAddress: "",
+      quantity: 0
     });
   };
 
@@ -81,6 +89,42 @@ const AddCertfiedSeeds = () => {
                     name="tagNumber"
                     onChange={handleChange}
                     placeholder="Tag Number"
+                  />
+                </Form.Group>
+                <Form.Group widths="equal">
+                  <Form.Field
+                    control={Input}
+                    label="Producer Name"
+                    required
+                    name="producerName"
+                    onChange={handleChange}
+                    placeholder="Producer Name"
+                  />
+                  <Form.Field
+                    control={Input}
+                    label="Producer Contact"
+                    required
+                    name="producerContact"
+                    onChange={handleChange}
+                    placeholder="Producer Contact"
+                  />
+                </Form.Group>
+                <Form.Group widths="equal">
+                  <Form.Field
+                    control={Input}
+                    label="Producer Address"
+                    required
+                    name="producerAddress"
+                    onChange={handleChange}
+                    placeholder="Producer Address"
+                  />
+                  <Form.Field
+                    control={Input}
+                    label="Quantity"
+                    required
+                    name="quantity"
+                    onChange={handleChange}
+                    placeholder="quantity"
                   />
                 </Form.Group>
                 <Form.Group widths="equal">

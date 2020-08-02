@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CertifiedSeedsTable from "./CertifiedSeedsTable";
+import { getInventory } from "../../../../../actions/actions";
+import { Context } from "../../../../../Context/Context";
 
 const ShowCertifiedSeeds = () => {
+  const { supplierData } = useContext(Context);
+  const [inventory, setInventory] = useState([]);
+  useEffect(() => {
+    const loadInventory = () => {
+      getInventory(supplierData._id)
+        .then((res) => {
+          console.log(res.data);
+          setInventory(() => [...res.data]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    loadInventory();
+  }, [supplierData]);
+
   return (
     <div className="p-5">
       <p className="title text-dark">Show Certified Seeds</p>
       <div className="table-wrapper">
         <CertifiedSeedsTable
-          certifiedSeeds={drivers}
-          handleDelete={seedsID => {
+          certifiedSeeds={inventory}
+          handleDelete={(seedsID) => {
             // handleDeleteDriver(seedsID);
             alert(seedsID);
           }}

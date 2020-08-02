@@ -18,14 +18,17 @@ const driverHeaders = {
  * @returns {Object} Response Object
  */
 
-export const getLiveUpdates = supplierID => {
+export const getLiveUpdates = (supplierID) => {
   var res = axios.get(
     `${constants.BASE_URL}/order/getLiveUpdates/${supplierID}`
   );
   return res;
 };
-export const addCertifiedSeeds = cdata => {
-  var res = axios.post(`${constants.BASE_URL}/supplier/addCertifiedSeeds`, cdata);
+export const addCertifiedSeeds = (cdata) => {
+  var res = axios.post(
+    `${constants.BASE_URL}/supplier/addCertifiedSeeds`,
+    cdata
+  );
   return res;
 };
 
@@ -34,7 +37,7 @@ export const addCertifiedSeeds = cdata => {
  * @param {Object} regiterData
  * @returns {Object} Response Object
  */
-export const supplierRegister = regiterData => {
+export const supplierRegister = (regiterData) => {
   var res = axios.post(`${constants.BASE_URL}/supplier/create`, regiterData);
   return res;
 };
@@ -44,7 +47,7 @@ export const supplierRegister = regiterData => {
  * @param {Object} loginData
  * @returns {Object} Response Object
  */
-export const supplierLogin = loginData => {
+export const supplierLogin = (loginData) => {
   var res = axios.post(`${constants.BASE_URL}/supplier/login`, loginData);
   return res;
 };
@@ -87,7 +90,7 @@ export const updateSupplierDetails = (supplierData, supplierID) => {
  * @param {Object} productData
  * @returns {Object} Response object
  */
-export const addProduct = productData => {
+export const addProduct = (productData) => {
   var res = axios.post(
     `${constants.BASE_URL}/supplier/product/add`,
     productData
@@ -126,13 +129,24 @@ export const deleteProduct = (productBarCode, supplierID) => {
  * @param {String} supplierID
  * @returns {Array} List of product objects
  */
-export const getProductsOfASupplier = supplierID => {
+export const getProductsOfASupplier = (supplierID) => {
   var res = axios.get(
     `${constants.BASE_URL}/supplier/product/getProductsOfASupplier/${supplierID}`
   );
   return res;
 };
 
+/**
+ * Get all certified seeds of the specified supplier
+ * @param {String} supplierID
+ * @returns {Array} List of product objects
+ */
+export const getInventory = (supplierID) => {
+  var res = axios.get(
+    `${constants.BASE_URL}/supplier/getCertifiedSeedsOfSupplier/${supplierID}`
+  );
+  return res;
+};
 // Driver actions
 
 /**
@@ -154,7 +168,7 @@ export const updateCurrentStatusOfOrder = (supplierID, orderID, data) => {
  * @param {String} supplierID
  * @returns {Array} List of driver objects
  */
-export const getDriversOfASupplier = supplierID => {
+export const getDriversOfASupplier = (supplierID) => {
   var res = axios.get(
     `${constants.BASE_URL}/supplier/driver/getDriversOfASupplier/${supplierID}`
   );
@@ -179,7 +193,7 @@ export const deleteDriver = (driverID, supplierID) => {
  * @param {Object} driverData
  * @returns {Object} Response object
  */
-export const addDriver = driverData => {
+export const addDriver = (driverData) => {
   var res = axios.post(`${constants.BASE_URL}/supplier/driver/add`, driverData);
   return res;
 };
@@ -188,7 +202,7 @@ export const addDriver = driverData => {
  * Get the orders of the specified driver
  * @param {String} driverID
  */
-export const getOrdersOfDriver = driverID => {
+export const getOrdersOfDriver = (driverID) => {
   var res = axios.get(`${constants.BASE_URL}/driver/getAllOrders/${driverID}`);
   return res;
 };
@@ -227,14 +241,14 @@ export const markAsDelivered = (orderID, supplierID) => {
  * @param {String} supplierID
  * @returns {null} No response
  */
-export const getOrdersOfASupplier = supplierID => {
+export const getOrdersOfASupplier = (supplierID) => {
   var res = axios.get(
     `${constants.BASE_URL}/supplier/order/getOrdersOfASupplier/${supplierID}`
   );
   return res;
 };
 
-export const getNotificationsOfASupplier = supplierID => {
+export const getNotificationsOfASupplier = (supplierID) => {
   var res = axios.post(`${constants.BASE_URL}/supplier/getNotification`, {
     supplierID
   });
@@ -261,7 +275,7 @@ export const dispatchOrder = (orderID, orderData, supplierID) => {
  * @param {Object} customerData - Customer details for registration.
  * @returns {Response} - Response object
  */
-export const registerCustomer = customerData => {
+export const registerCustomer = (customerData) => {
   var res = axios.post(`${constants.BASE_URL}/customer/create`, customerData);
   return res;
 };
@@ -271,7 +285,7 @@ export const registerCustomer = customerData => {
  * @param {Object} credentials - Customer's login credentials.
  * @returns {Response} - Response object
  */
-export const loginCustomer = credentials => {
+export const loginCustomer = (credentials) => {
   var res = axios.post(`${constants.BASE_URL}/customer/login`, credentials);
   return res;
 };
@@ -330,7 +344,7 @@ export const removeItemFromCart = (customerID, productID) => {
  * @param {Object} productsID - Object with products id in array.
  * @returns {Array.<Object>} - Array with product details object
  */
-export const getProductsInCart = productsID => {
+export const getProductsInCart = (productsID) => {
   var res = axios.post(
     `${constants.BASE_URL}/customer/getProductsFromCart`,
     productsID
@@ -343,7 +357,7 @@ export const getProductsInCart = productsID => {
  * @param {Object} orderData - Object with order details.
  * @returns {Object} - Object with order receipt and details.
  */
-export const placeOrder = orderData => {
+export const placeOrder = (orderData) => {
   var res = axios.post(`${constants.BASE_URL}/user/order/add`, orderData);
   return res;
 };
@@ -353,7 +367,7 @@ export const triggerDriverSMS = () => {
   var res = axios.post(`${constants.BASE_URL}/order/triggerDriverSMS`, {});
   return res;
 };
-export const updateNotification = data => {
+export const updateNotification = (data) => {
   var res = axios.post(`${constants.BASE_URL}/driver/updateNotification`, data);
   return res;
 };
@@ -363,7 +377,7 @@ export const updateNotification = data => {
  * @param {Object} credentials - Driver credentials for login.
  * @return {Object} - Driver data object.
  */
-export const loginDriver = credentials => {
+export const loginDriver = (credentials) => {
   var res = axios.post(`${constants.BASE_URL}/driver/login`, credentials);
   return res;
 };
