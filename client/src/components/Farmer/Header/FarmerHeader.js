@@ -46,13 +46,17 @@ const FarmerHeader = (props) => {
 
   const options = [
     {
-      key: "logout",
-      text: <span onClick={handleLogout}>{t('logout')}</span>,
+      key: "MyOrders",
+      text: (
+        <span onClick={() => history.push("/farmer/orders")}>
+          {t("myOrders")}
+        </span>
+      ),
       disabled: false
     },
     {
-      key: "MyOrders",
-      text: <span onClick={() => history.push("/farmer/orders")}>{t('myOrders')}</span>,
+      key: "logout",
+      text: <span onClick={handleLogout}>{t("logout")}</span>,
       disabled: false
     }
   ];
@@ -87,27 +91,32 @@ const FarmerHeader = (props) => {
       key: "kannada",
       text: "ಕನ್ನಡ",
       value: "kannada"
-    },{
+    },
+    {
       key: "tamil",
       text: "தமிழ்",
       value: "tamil"
-    },{
+    },
+    {
       key: "telugu",
       text: "తెలుగు",
       value: "telugu"
-    },{
+    },
+    {
       key: "punjabi",
       text: "ਪੰਜਾਬੀ",
       value: "punjabi"
-    },{
+    },
+    {
       key: "marathi",
       text: "मराठी",
       value: "marathi"
-    },{
+    },
+    {
       key: "bengali",
       text: "বাংলা",
       value: "bengali"
-    },
+    }
   ];
 
   return (
