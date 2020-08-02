@@ -1,6 +1,7 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
-const FeedbackTable = props => {
+
+const FeedbackTable = (props) => {
   const orders = [
     {
       orderID: "221",
@@ -22,6 +23,11 @@ const FeedbackTable = props => {
       feedback:
         "Ithellam oru seed nu vikka vanthutan.kaila maatna setha da mavane.meet you at consumer court",
       sentiment: "negative"
+    },
+    {
+      orderID: "225",
+      feedback: "The seed yield is not so good.",
+      sentiment: "negative"
     }
   ];
   return (
@@ -30,11 +36,11 @@ const FeedbackTable = props => {
         <Table.Row textAlign="center">
           <Table.HeaderCell rowSpan="2">Order ID</Table.HeaderCell>
           <Table.HeaderCell rowSpan="2">Customer feedback</Table.HeaderCell>
-          <Table.HeaderCell rowSpan="2">Sentiment</Table.HeaderCell>
+          <Table.HeaderCell rowSpan="2">Category</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {orders.map(order => (
+        {orders.map((order) => (
           <Table.Row key={order.orderID}>
             <Table.Cell>{order.orderID}</Table.Cell>
             <Table.Cell title={order.feedback}>
