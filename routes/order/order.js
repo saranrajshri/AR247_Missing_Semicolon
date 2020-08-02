@@ -88,6 +88,28 @@ const sendSMS = message => {
     .then(messsage => console.log(message.sid));
 };
 
+order.triggerDriverSMS = (req, res, next) => {
+  try {
+    const client = require("twilio")(
+      "AC987642e062b8abd817200b4f5021148c",
+      "749e71e33617dccde9cb37688e3ac9ea"
+    );
+    client.messages
+      .create({
+        from: "+12029335106",
+        to: "+916383909320",
+        body:
+          "You are near to the customer's location..Call him and intimate him ! " +
+          "Customer - +911234567890, Supplier - +910987654321"
+      })
+      .then(messsage => console.log(message.sid));
+
+    res.send({ message: "SMS sent" });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const fetchLiveUpdates = async (req, supplierID) => {
   var client = req.app.get("client");
   try {

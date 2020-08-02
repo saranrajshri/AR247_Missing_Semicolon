@@ -76,7 +76,8 @@ router
     "/driver/order/updateCurrentStatus/:orderID/:supplierID",
     order.updateCurrentStatus
   )
-  .get("/order/getLiveUpdates/:supplierID", order.getLiveUpdates);
+  .get("/order/getLiveUpdates/:supplierID", order.getLiveUpdates)
+  .post("/order/triggerDriverSMS", order.triggerDriverSMS);
 
 // Customer routes
 router
