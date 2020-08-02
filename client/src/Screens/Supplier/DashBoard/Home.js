@@ -126,7 +126,7 @@ const Home = () => {
   // Function to get the data such as Orders, Products, Drivers of the supplier
   useEffect(() => {
     initializeSocketListeners();
-    // getDataFromDB();
+    getDataFromDB();
   }, []);
 
   return (
