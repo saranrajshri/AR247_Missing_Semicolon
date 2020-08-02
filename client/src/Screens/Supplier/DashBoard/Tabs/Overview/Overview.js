@@ -5,7 +5,7 @@ import DriversTable from "./Components/DriversTable";
 const Overview = () => {
   var vehicleCat = [
     {
-      text: "All Order Count",
+      text: "All Orders",
       quanity: 5,
       classColor: "text-orange",
       color: "#FFA700"
