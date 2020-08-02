@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Table, Button, Icon } from "semantic-ui-react";
 /**
@@ -8,6 +8,15 @@ import { Table, Button, Icon } from "semantic-ui-react";
  */
 const CertifiedSeedsTable = (props) => {
   const { certifiedSeeds, handleDelete } = props;
+  const [inventory, setInventory] = useState(certifiedSeeds);
+
+  useEffect(() => {
+    const setData = () => {
+      console.log("ss", certifiedSeeds);
+      setInventory(certifiedSeeds);
+    };
+    setData();
+  }, [certifiedSeeds]);
   return (
     <Table celled striped structured fixed>
       <Table.Header>
@@ -22,14 +31,14 @@ const CertifiedSeedsTable = (props) => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {certifiedSeeds.map((seeds) => (
-          <Table.Row key={seeds.seedsID}>
-            <Table.Cell>{seeds.seedsID}</Table.Cell>
+        {inventory.map((seeds) => (
+          <Table.Row key={seeds._id}>
+            <Table.Cell>{seeds._id}</Table.Cell>
             <Table.Cell>{seeds.producerName}</Table.Cell>
-            <Table.Cell>{seeds.contact}</Table.Cell>
-            <Table.Cell>{seeds.address}</Table.Cell>
+            <Table.Cell>{seeds.producerContact}</Table.Cell>
+            <Table.Cell>{seeds.producerAddress}</Table.Cell>
             <Table.Cell>{seeds.quantity}</Table.Cell>
-            <Table.Cell singleLine>{seeds.expiryDate}</Table.Cell>
+            <Table.Cell singleLine>{seeds.expiresAt}</Table.Cell>
             <Table.Cell textAlign="center">
               <Button onClick={() => handleDelete(seeds._id)}>
                 <Icon name="delete" fitted color="red" />
@@ -50,7 +59,7 @@ CertifiedSeedsTable.propTypes = {
   /**
    * Function to handle delete button.
    */
-  handleDelete: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired
 };
 
 export default CertifiedSeedsTable;
