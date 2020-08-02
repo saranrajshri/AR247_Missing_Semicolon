@@ -3,6 +3,8 @@ import { initReactI18next } from "react-i18next";
 import english from "./lang/en"
 import hindi from "./lang/hin"
 import odia from "./lang/odia"
+import gujarati from "./lang/gujarati"
+
 
 // the translations
 // (tip move them in a JSON file and import them)
@@ -10,6 +12,7 @@ const resources = {
   en: english,
   hin: hindi,
   odia: odia,
+  gujarati: gujarati,
 };
 
 i18n
