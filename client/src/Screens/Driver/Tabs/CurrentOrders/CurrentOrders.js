@@ -115,7 +115,17 @@ const CurrentOrders = () => {
       filteredOrders[0].isOrderDelivered === false
     ) {
       startLocationSharing(filteredOrders[0]);
+      if (filteredOrders[0].isNear) {
+        sleep(4000).then(() => {
+          addToast({
+            type: "success",
+            message: "One SMS received....Check your mobile inbox"
+          });
+        });
+      }
     }
+
+    //
   }, []);
   return (
     <div id="driver">
