@@ -10,7 +10,7 @@ const CompletedOrders = ({ orders }) => {
         <div className="card">
           <div className="card-header">{order.orderID}</div>
           <div className="card-content">
-            <p style={{ fontSize: "18px", color: "#888888" }}>
+            <p style={{ fontSize: "18px", color: "#555555" }}>
               Product Name:{" "}
               <span
                 style={{
@@ -22,7 +22,7 @@ const CompletedOrders = ({ orders }) => {
                 {order.orderData.products[0].productName}
               </span>
             </p>
-            <p style={{ fontSize: "17 px", color: "#888888" }}>
+            <p style={{ fontSize: "18px", color: "#555555" }}>
               Total Price:{" "}
               <span
                 style={{
@@ -33,6 +33,18 @@ const CompletedOrders = ({ orders }) => {
               >
                 <FontAwesomeIcon icon={faRupeeSign} />
                 {order.orderData.orderPrice}
+              </span>
+            </p>
+            <p style={{ fontSize: "18px", color: "#555555" }}>
+              Delivered at:{" "}
+              <span
+                style={{
+                  fontSize: "17px",
+                  paddingLeft: "5px",
+                  color: "#212121"
+                }}
+              >
+                {order.orderDeliveredTime}
               </span>
             </p>
           </div>
@@ -56,7 +68,8 @@ CompletedOrders.defaultProps = {
             productName: "name"
           }
         ]
-      }
+      },
+      orderDeliveredTime: "11.00PM 01-08-2020"
     }
   ]
 };
