@@ -1,9 +1,11 @@
 import React from "react";
 import { Card, Image, GridColumn, GridRow } from "semantic-ui-react";
-import { Button } from "semantic-ui-react";
+import DetailsModal from "./TrackOrderModal"
+import { useTranslation } from 'react-i18next';
+const CurrentOrders = () => {
+const { t, i18n } = useTranslation();
 
-const CurrentOrders = () => (
-  <div>
+  return (<div>
     <GridColumn>
       <GridRow style={{ display: "flex", justifyContent: "center" }}>
         <Card style={{ width: "90%", marginTop: "10%" }}>
@@ -27,29 +29,19 @@ const CurrentOrders = () => (
             style={{ marginBottom: "10px", marginLeft: "35px" }}
           >
             <span style={{ fontWeight: "bold" }}>
-              Order Status :
+              {t('orderStatus')} :
               <span style={{ color: "green", paddingLeft: "15px" }}>
-                Dispatched
+                {t('dispatched')}
               </span>
             </span>
           </Card.Description>
           <Card.Content extra>
-            <Button
-              basic
-              color="green"
-              style={{
-                display: "block",
-                marginLeft: "auto",
-                marginRight: "auto"
-              }}
-            >
-              View More
-            </Button>
+            <DetailsModal/>
           </Card.Content>
         </Card>
       </GridRow>
     </GridColumn>
-  </div>
-);
+  </div>)
+};
 
 export default CurrentOrders;

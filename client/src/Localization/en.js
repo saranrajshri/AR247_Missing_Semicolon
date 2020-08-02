@@ -23,6 +23,7 @@ export default {
     searchPlace: "Search Products Here...!",
     // Farmerhome
     sresults: "Search results for",
+    myOrders: "My Orders",
     // ProductDescription
     cart: "Add to Cart",
     buy: "BUY NOW",
@@ -52,6 +53,20 @@ export default {
     enterPass: "Enter your password",
     login: "LOGIN",
     signUp: "Sign Up",
-    forgotPass: "Forgot password?"
+    forgotPass: "Forgot password?",
+    // My Orders
+    orderStatus : "Order Status",
+    dispatched: "Dispatched",
+    trackOrder : "Track Order",
+    oProcess : "Order Processed",
+    oProcessDesc : "Your Order has been Successfully Processed",
+    disDesc: "Your Order is on the way...",
+    oRec : "Order Received",
+    awaCon : "(Awaiting Confirmation)",
+    close : "Close",
+    currentOrders: "currentOrders",
+    completedOrders : "completedOrders",
+    pName : "Product Name",
+    tPrice : "Total Price",
   }
 };
