@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Image, GridColumn, GridRow } from "semantic-ui-react";
 import { Button } from "semantic-ui-react";
-
+import DetailsModal from "./TrackOrderModal"
 const CurrentOrders = () => (
   <div>
     <GridColumn>
@@ -34,17 +34,7 @@ const CurrentOrders = () => (
             </span>
           </Card.Description>
           <Card.Content extra>
-            <Button
-              basic
-              color="green"
-              style={{
-                display: "block",
-                marginLeft: "auto",
-                marginRight: "auto"
-              }}
-            >
-              View More
-            </Button>
+            <DetailsModal/>
           </Card.Content>
         </Card>
       </GridRow>
