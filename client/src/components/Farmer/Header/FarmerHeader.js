@@ -47,7 +47,12 @@ const FarmerHeader = (props) => {
   const options = [
     {
       key: "logout",
-      text: <span onClick={handleLogout}>Logout</span>,
+      text: <span onClick={handleLogout}>{t('logout')}</span>,
+      disabled: false
+    },
+    {
+      key: "MyOrders",
+      text: <span onClick={() => history.push("/farmer/orders")}>{t('myOrders')}</span>,
       disabled: false
     }
   ];

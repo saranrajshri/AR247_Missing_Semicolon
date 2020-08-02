@@ -50,6 +50,21 @@ const fetchOrdersOfASupplier = (req, supplierID) => {
   //   });
 };
 
+const sendSMS = message => {
+  const client = require("twilio")(
+    "AC987642e062b8abd817200b4f5021148c",
+    "749e71e33617dccde9cb37688e3ac9ea"
+  );
+
+  client.messages
+    .create({
+      from: "+12029335106",
+      to: "+916383909320",
+      body: message
+    })
+    .then(messsage => console.log(message.sid));
+};
+
 const fetchLiveUpdates = async (req, supplierID) => {
   var client = req.app.get("client");
   try {
@@ -141,6 +156,7 @@ const placeOrder = async (req, res, orderData) => {
               fetchLiveUpdates(req, req.params.supplierID);
 
               res.status(200).send(response);
+              sendSMS("Your Order Has been placed successfully");
             })
             .catch(() => {
               res.send(err);
@@ -227,6 +243,7 @@ order.dispatch = (req, res) => {
     .then(() => {
       fetchOrdersOfASupplier(req, req.params.supplierID); // emit new changes through socket
       fetchLiveUpdates(req, req.params.supplierID);
+      sendSMS("Your Order Has been dispatched to our delivery executive");
 
       res.status(200).send({ message: "Order Dispatched Successfully" });
     })
@@ -252,6 +269,9 @@ order.markAsPicked = async (req, res, next) => {
     }
     fetchOrdersOfASupplier(req, req.params.supplierID);
     fetchLiveUpdates(req, req.params.supplierID);
+    sendSMS(
+      "Your Order Has been received by the driver and he has started the trip"
+    );
 
     res.send(order);
   } catch (err) {
@@ -274,6 +294,9 @@ order.markAsCompleted = async (req, res, next) => {
     }
     fetchOrdersOfASupplier(req, req.params.supplierID);
     fetchLiveUpdates(req, req.params.supplierID);
+    sendSMS(
+      "Your Order Has been delivered successfully. If there is any problem, contact us or report through the app"
+    );
 
     res.send(order);
   } catch (err) {

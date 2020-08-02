@@ -11,7 +11,8 @@
     "mongoose": "^5.9.23",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "twilio": "^3.48.1"
   },
   "scripts": {
     "start": "node server",

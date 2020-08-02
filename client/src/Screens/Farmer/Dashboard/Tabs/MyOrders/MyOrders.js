@@ -6,15 +6,18 @@ import CompletedOrders from "./components/CompletedOrders/CompletedOrders";
 import { Menu } from "semantic-ui-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from 'react-i18next';
+
 
 const MyOrders = () => {
   const history = useHistory();
   const [activeItem, setActiveItem] = useState("completedOrders");
-
+  
   const handleItemClick = (e, { name }) => {
     setActiveItem(name);
   };
-
+  
+  const { t, i18n } = useTranslation();
   return (
     <>
       <div id="farmer-header">
@@ -30,17 +33,17 @@ const MyOrders = () => {
       </div>
       <Menu tabular widths="2" style={{ marginTop: "-1px" }}>
         <Menu.Item
-          name="currentOrders"
-          active={activeItem === "currentOrders"}
+          name={t('currentOrders')}
+          active={activeItem === t('currentOrders')}
           onClick={handleItemClick}
         />
         <Menu.Item
-          name="completedOrders"
-          active={activeItem === "completedOrders"}
+          name={t('completedOrders')}
+          active={activeItem === t('completedOrders')}
           onClick={handleItemClick}
         />
       </Menu>
-      {activeItem === "currentOrders" ? <CurrentOrders /> : <CompletedOrders />}
+      {activeItem ===  t('currentOrders') ? <CurrentOrders /> : <CompletedOrders />}
     </>
   );
 };
