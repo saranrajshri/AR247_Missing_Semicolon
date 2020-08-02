@@ -14,7 +14,7 @@ import {
   AssignDrivers,
   IncomingOrders,
   Settings,
-  Notifications
+  Notifications,
 } from "./Tabs";
 
 // Context
@@ -31,7 +31,7 @@ import {
   getOrdersOfASupplier,
   isSupplierAuthenticated,
   getLiveUpdates,
-  getNotificationsOfASupplier
+  getNotificationsOfASupplier,
 } from "../../../actions/actions";
 
 import socketIOClient from "socket.io-client";
@@ -54,7 +54,7 @@ const Home = () => {
     setFullScreenLoader,
     setSupplierData,
     setNotifications,
-    setLiveUpdates
+    setLiveUpdates,
   } = useContext(Context);
 
   // Components mapping
@@ -67,29 +67,29 @@ const Home = () => {
     ManageOrders: ManageOrders,
     IncomingOrders: IncomingOrders,
     Settings: Settings,
-    Notifications: Notifications
+    Notifications: Notifications,
   };
   var Component = mapping[selectedComponent];
 
   // Socket Listeners
   const initializeSocketListeners = () => {
     // listener to receive real time products data
-    socket.on("products", products => {
+    socket.on("products", (products) => {
       setProducts(products);
     });
 
-    socket.on("drivers", drivers => {
+    socket.on("drivers", (drivers) => {
       setDrivers(drivers);
     });
-    socket.on("orders", orders => {
+    socket.on("orders", (orders) => {
       // setOrders(orders);
     });
-    socket.on("notifications", notifications => {
+    socket.on("notifications", (notifications) => {
       // setOrders(orders);
       setNotifications(notifications);
       // console.log(notifications);
     });
-    socket.on("liveUpdates", liveUpdates => {
+    socket.on("liveUpdates", (liveUpdates) => {
       setLiveUpdates(liveUpdates);
     });
   };
@@ -97,15 +97,15 @@ const Home = () => {
   const supplierAuth = async () => {
     setFullScreenLoader(true);
     await isSupplierAuthenticated()
-      .then(res => {
+      .then((res) => {
         setFullScreenLoader(false);
         setSupplierData(res.data);
         getProductsOfASupplier(res.data._id);
         getDriversOfASupplier(res.data._id);
-        getNotificationsOfASupplier(res.data._id).then(res => {
+        getNotificationsOfASupplier(res.data._id).then((res) => {
           console.log(res.data);
         });
-        getOrdersOfASupplier(res.data._id).then(res => {
+        getOrdersOfASupplier(res.data._id).then((res) => {
           setOrders(res.data);
         });
         getLiveUpdates(res.data._id);
@@ -124,7 +124,7 @@ const Home = () => {
   // Function to get the data such as Orders, Products, Drivers of the supplier
   useEffect(() => {
     initializeSocketListeners();
-    getDataFromDB();
+    // getDataFromDB();
   }, []);
 
   return (
