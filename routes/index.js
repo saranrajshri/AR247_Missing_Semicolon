@@ -37,6 +37,10 @@ router
     product.getProductsOfASupplier
   )
   .post("/supplier/addCertifiedSeeds", product.addCertifiedSeed)
+  .get(
+    "/supplier/getCertifiedSeedsOfSupplier/:supplierID",
+    product.getCertifiedSeedsOfASupplier
+  )
   .get("/customer/product/getAll", product.getAll);
 
 // Driver Routes

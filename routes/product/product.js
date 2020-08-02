@@ -98,3 +98,14 @@ product.addCertifiedSeed = async (req, res, next) => {
     next(err);
   }
 };
+
+product.getCertifiedSeedsOfASupplier = async (req, res, next) => {
+  try {
+    const result = await CertifiedSeed.find({
+      supplierID: req.params.supplierID
+    });
+    res.send(result);
+  } catch (err) {
+    next(err);
+  }
+};
