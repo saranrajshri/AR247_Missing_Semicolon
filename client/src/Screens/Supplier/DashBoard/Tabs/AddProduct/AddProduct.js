@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 
 // Semantic UI
 import {
@@ -16,7 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle, faEraser } from "@fortawesome/free-solid-svg-icons";
 
 // Actions
-import { addProduct } from "../../../../../actions/actions";
+import { addProduct, getInventory } from "../../../../../actions/actions";
 
 // Context
 import { Context } from "../../../../../Context/Context";
@@ -40,12 +40,12 @@ const AddProduct = () => {
   const [error, setError] = useState(null);
 
   // Set data to state
-  const handleChange = e => {
+  const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
 
   // update checkbox data to state
-  const handleCheckBox = value => {
+  const handleCheckBox = (value) => {
     setProduct({ ...product, isHidden: value });
   };
 
@@ -65,13 +65,9 @@ const AddProduct = () => {
       isHidden: false
     });
   };
+  const [options, setOptions] = useState([]);
 
-  const options = [
-    { key: "0", text: "BAC0001", value: "BAC0001" },
-    { key: "1", text: "BAC0002", value: "BAC0002" }
-  ];
-
-  const triggerImageUpload = e => {
+  const triggerImageUpload = (e) => {
     try {
       imageUploadRef.current._handleSubmit(e);
     } catch {
@@ -85,14 +81,14 @@ const AddProduct = () => {
 
   // This function will be triggered from the imageUpload Component
   // Add product to DB
-  const submit = imageURL => {
+  const submit = (imageURL) => {
     setFullScreenLoader(true);
     if (imageURL !== "") {
       var productData = product;
       productData.supplierID = supplierData._id;
       productData.imageURL = imageURL;
       addProduct(productData)
-        .then(res => {
+        .then((res) => {
           if (res.status === 200) {
             imageUploadRef.current._clearState();
             setFullScreenLoader(false);
@@ -108,12 +104,41 @@ const AddProduct = () => {
             setError({ content: "Failed to add product", pointer: "above " });
           }
         })
-        .catch(err => {
+        .catch((err) => {
           setFullScreenLoader(false);
           setError({ content: "Barcode already exists", pointer: "above " });
         });
     }
   };
+
+  const [inventory, setInventory] = useState([]);
+  useEffect(() => {
+    const loadInventory = () => {
+      getInventory(supplierData._id)
+        .then((res) => {
+          console.log(res.data);
+          setInventory(() => [...res.data]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    loadInventory();
+  }, [supplierData]);
+
+  useEffect(() => {
+    const loadOptions = () => {
+      if (inventory.length !== 0) {
+        for (let s of inventory) {
+          setOptions([
+            ...options,
+            { key: s.barCode, text: s.barCode, value: s.barCode }
+          ]);
+        }
+      }
+    };
+    loadOptions();
+  }, [inventory]);
 
   return (
     <div className="p-5">
@@ -182,7 +207,7 @@ const AddProduct = () => {
                 <Form.Checkbox
                   checked={!product.isHidden}
                   name="isHidden"
-                  onChange={e => {
+                  onChange={(e) => {
                     handleCheckBox(!product.isHidden);
                   }}
                   label="Publish Now"
