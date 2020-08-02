@@ -18,8 +18,9 @@ import {
 import { useToast } from "../../../../Context/ToastContext";
 
 const CurrentOrders = () => {
-  const { orders, watchDriverPosition } = useContext(DriverContext);
+  const { driverData, orders, watchDriverPosition } = useContext(DriverContext);
   const { addToast } = useToast();
+
   const [isTripPaused, setPause] = useState(false);
 
   const openGoogleMaps = (pickUpLocationName, dropLocationName) => {
@@ -76,16 +77,31 @@ const CurrentOrders = () => {
     });
     var data = {
       title: isTripPaused
-        ? `Driver ID - Paused`
-        : `Driver ID - Resumed the trip`,
+        ? `Driver ID ${driverData.driverID} - Paused`
+        : `Driver ID ${driverData.driverID} - Resumed the trip`,
 
       message: isTripPaused
-        ? `Driver ID - Paused`
-        : `Driver ID - Resumed the trip`,
+        ? `Driver ID ${driverData.driverID} - has paused his location sharing`
+        : `Driver ID ${driverData.driverID} - has resumed his location sharing`,
       supplierID: supplierID
     };
     updateNotification(data).then(res => {
       console.log(res.data);
+    });
+  };
+
+  const reportProblem = supplierID => {
+    var data = {
+      title: `Driver has reported a problem`,
+      message: `Driver ID - ${driverData.driverID} has reported a problem...Contact him ASAP`,
+      supplierID: supplierID
+    };
+    updateNotification(data).then(res => {
+      console.log(res.data);
+      addToast({
+        type: "success",
+        message: "Problem Reported Successfully...!"
+      });
     });
   };
 
@@ -199,7 +215,12 @@ const CurrentOrders = () => {
                 <Divider />
                 <div className="grid-container">
                   <div className="grid-item">
-                    <Button color="red">Report a problem</Button>
+                    <Button
+                      color="red"
+                      onClick={() => reportProblem(order.supplierID)}
+                    >
+                      Report a problem
+                    </Button>
                   </div>
                   <div className="grid-item">
                     <div className="float-right-container">
