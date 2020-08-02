@@ -38,6 +38,30 @@ const reverseGeoCoder = async coordinates => {
   return address;
 };
 
+const languageMappingsEnglish = {
+  dispatch: "Your Order Has been dispatched to our delivery executive",
+  pickedUp:
+    "Your Order Has been received by the driver and he has started the trip",
+  delivered:
+    "Your Order Has been delivered successfully. If there is any problem, contact us or report through the app",
+  checkpoints: "Your order has reached the checkpoint Chennai"
+};
+
+const languageMappingsTelegu = {
+  dispatch: "మీ ఆర్డర్ మా డెలివరీ ఎగ్జిక్యూటివ్‌కు పంపబడింది",
+  pickedUp: "మీ ఆర్డర్ డ్రైవర్ అందుకుంది మరియు అతను యాత్ర ప్రారంభించాడు",
+  delivered:
+    "మీ ఆర్డర్ విజయవంతంగా పంపిణీ చేయబడింది. ఏదైనా సమస్య ఉంటే, మమ్మల్ని సంప్రదించండి లేదా అనువర్తనం ద్వారా నివేదించండి",
+  checkpoints: "మీ ఆర్డర్ చెక్ పాయింట్ చెక్ పాయింట్ చేరుకుంది"
+};
+const languageMappingsTamil = {
+  dispatch: "உங்கள் ஆர்டர் எங்கள் விநியோக நிர்வாகிக்கு அனுப்பப்பட்டுள்ளது",
+  pickedUp: "உங்கள் ஆர்டரை டிரைவர் பெற்றுள்ளார், அவர் பயணத்தைத் தொடங்கினார்",
+  delivered:
+    "உங்கள் ஆர்டர் வெற்றிகரமாக வழங்கப்பட்டது. ஏதேனும் சிக்கல் இருந்தால், எங்களை தொடர்பு கொள்ளவும் அல்லது பயன்பாட்டின் மூலம் புகாரளிக்கவும்",
+  checkpoints: "உங்கள் ஆர்டர் சென்னை சோதனைச் சாவடியை அடைந்துள்ளது"
+};
+
 const fetchOrdersOfASupplier = (req, supplierID) => {
   // var client = req.app.get("client");
   // Order.find({ supplierID: supplierID })
@@ -58,7 +82,7 @@ const sendSMS = message => {
   client.messages
     .create({
       from: "+12029335106",
-      to: "+919500149967",
+      to: "+916383909320",
       body: message
     })
     .then(messsage => console.log(message.sid));
@@ -239,10 +263,21 @@ order.dispatch = (req, res) => {
       orderData: orderData.orderData
     }
   )
-    .then(() => {
+    .then(async () => {
       fetchOrdersOfASupplier(req, req.params.supplierID); // emit new changes through socket
       fetchLiveUpdates(req, req.params.supplierID);
-      sendSMS("Your Order Has been dispatched to our delivery executive");
+      const lang = await Order.findOne({ orderID: req.params.orderID });
+
+      var textMessage;
+
+      if (lang.customerData.language === "english") {
+        textMessage = languageMappingsEnglish["dispatch"];
+      } else if (lang.customerData.language === "telegu") {
+        textMessage = languageMappingsTelegu["dispatch"];
+      } else if (lang.customerData.language === "tamil") {
+        textMessage = languageMappingsTamil["dispatch"];
+      }
+      sendSMS(textMessage);
 
       res.status(200).send({ message: "Order Dispatched Successfully" });
     })
@@ -268,9 +303,19 @@ order.markAsPicked = async (req, res, next) => {
     }
     fetchOrdersOfASupplier(req, req.params.supplierID);
     fetchLiveUpdates(req, req.params.supplierID);
-    sendSMS(
-      "Your Order Has been received by the driver and he has started the trip"
-    );
+
+    const lang = await Order.findOne({ orderID: req.params.orderID });
+
+    var textMessage;
+
+    if (lang.customerData.language === "english") {
+      textMessage = languageMappingsEnglish["pickedUp"];
+    } else if (lang.customerData.language === "telegu") {
+      textMessage = languageMappingsTelegu["pickedUp"];
+    } else if (lang.customerData.language === "tamil") {
+      textMessage = languageMappingsTamil["pickedUp"];
+    }
+    sendSMS(textMessage);
 
     res.send(order);
   } catch (err) {
@@ -293,9 +338,19 @@ order.markAsCompleted = async (req, res, next) => {
     }
     fetchOrdersOfASupplier(req, req.params.supplierID);
     fetchLiveUpdates(req, req.params.supplierID);
-    sendSMS(
-      "Your Order Has been delivered successfully. If there is any problem, contact us or report through the app"
-    );
+
+    const lang = await Order.findOne({ orderID: req.params.orderID });
+
+    var textMessage;
+
+    if (lang.customerData.language === "english") {
+      textMessage = languageMappingsEnglish["delivered"];
+    } else if (lang.customerData.language === "telegu") {
+      textMessage = languageMappingsTelegu["delivered"];
+    } else if (lang.customerData.language === "tamil") {
+      textMessage = languageMappingsTamil["delivered"];
+    }
+    sendSMS(textMessage);
 
     res.send(order);
   } catch (err) {
