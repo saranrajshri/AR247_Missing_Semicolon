@@ -73,11 +73,11 @@ const CurrentOrders = () => {
     setPause(!isTripPaused);
     addToast({
       type: "success",
-      message: isTripPaused ? "Trip Paused" : "Trip Resumed"
+      message: !isTripPaused ? "Trip Paused" : "Trip Resumed"
     });
     var data = {
       title: isTripPaused
-        ? `Driver ID ${driverData.driverID} - Paused`
+        ? `Driver ID ${driverData.driverID} - has taken a break`
         : `Driver ID ${driverData.driverID} - Resumed the trip`,
 
       message: isTripPaused

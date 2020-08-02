@@ -4,7 +4,7 @@ export const Context = createContext();
 
 // Global state provider
 const ContextProvider = props => {
-  const [selectedComponent, setSelectedComponent] = useState("ManageOrders");
+  const [selectedComponent, setSelectedComponent] = useState("Overview");
   const [supplierData, setSupplierData] = useState({});
   const [isFullScreenLoaderVisible, setFullScreenLoader] = useState(false);
   const [isAlertOpen, setAlert] = useState({
