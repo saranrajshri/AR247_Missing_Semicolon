@@ -19,7 +19,7 @@ import {
 // Context
 import { Context } from "../../../Context/Context";
 
-const Sidebar = (props) => {
+const Sidebar = props => {
   const { setSelectedComponent, supplierData } = useContext(Context);
   const [selectedIndex, setSelectedIndex] = useState(3);
   const [options] = useState([
@@ -29,8 +29,16 @@ const Sidebar = (props) => {
       iconName: faThLarge
     },
     {
-      name: " Products",
+      name: "Inventory",
       subCategories: [
+        {
+          name: "Add Certified Seeds to Inventory",
+          key: "AddCertifiedSeed"
+        },
+        {
+          name: "Show Inventory",
+          key: "ShowCertifiedSeeds"
+        },
         {
           name: "Add Products",
           key: "AddProduct"
@@ -81,7 +89,7 @@ const Sidebar = (props) => {
   ]);
   const history = useHistory();
 
-  const handleSelect = (index) => {
+  const handleSelect = index => {
     if (index === selectedIndex) setSelectedIndex(-1);
     else if (options[index].subCategories === undefined)
       setSelectedComponent(options[index].key);
