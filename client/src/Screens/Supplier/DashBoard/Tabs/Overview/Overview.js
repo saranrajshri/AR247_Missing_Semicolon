@@ -1,4 +1,5 @@
 import React from "react";
+import FeedbackTable from "./Components/FeedbackTable";
 
 const Overview = () => {
   var vehicleCat = [
@@ -6,20 +7,20 @@ const Overview = () => {
       text: "All Order Count",
       quanity: 5,
       classColor: "text-orange",
-      color: "#FFA700"
+      color: "#FFA700",
     },
     {
       text: "Positive",
       quanity: 2,
       classColor: "text-green",
-      color: "#21b621"
+      color: "#21b621",
     },
     {
       text: "Negative",
       quanity: 3,
       classColor: "text-red",
-      color: "#ff3939"
-    }
+      color: "#ff3939",
+    },
   ];
   return (
     <div className="p-5">
@@ -30,7 +31,7 @@ const Overview = () => {
         <div className="grid-item">
           <div className="card">
             <div className="card-content flex-row">
-              {vehicleCat.map(cat => (
+              {vehicleCat.map((cat) => (
                 <div className="card card-border-shadow block-card">
                   <div className="card-content">
                     <div className="justify-center">
@@ -47,7 +48,9 @@ const Overview = () => {
               ))}
             </div>
           </div>
-          <div className="table-wrapper"></div>
+          <div className="table-wrapper">
+            <FeedbackTable></FeedbackTable>
+          </div>
         </div>
         {/* Right Column */}
         <div className="grid-item">

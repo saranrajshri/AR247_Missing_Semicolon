@@ -9,14 +9,16 @@ import { Message } from "semantic-ui-react";
 // };
 const Notifications = () => {
   const { notifications } = useContext(Context);
-  const messages = notifications.map((message, index) => (
-    <Message
-      warning
-      key={index}
-      header={message.title}
-      content={message.message}
-    />
-  ));
+  const messages = notifications
+    .reverse()
+    .map((message, index) => (
+      <Message
+        warning
+        key={index}
+        header={message.title}
+        content={message.message}
+      />
+    ));
   return <div>{messages}</div>;
 };
 export default Notifications;
