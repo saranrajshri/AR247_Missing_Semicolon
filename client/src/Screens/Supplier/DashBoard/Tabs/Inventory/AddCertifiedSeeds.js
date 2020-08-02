@@ -1,11 +1,8 @@
 import React, { useState, useContext } from "react";
-
 // Semantic UI
-import { Form, Input, TextArea, Button, Divider } from "semantic-ui-react";
+import { Form, Input, Button, Divider } from "semantic-ui-react";
 //Actions
-
-import {addCertifiedSeeds} from "../../../../../actions/actions"
-
+import { addCertifiedSeeds } from "../../../../../actions/actions";
 // Font Awesome Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle, faEraser } from "@fortawesome/free-solid-svg-icons";
@@ -16,11 +13,11 @@ const AddCertfiedSeeds = () => {
     certificateNumber: "",
     tagNumber: "",
     issuedAt: "",
-    expiresAt: "",
+    expiresAt: ""
   });
+  const { setAlert, setFullScreenLoader, supplierData } = useContext(Context);
 
-  const { setAlert, setFullScreenLoader,supplierData } = useContext(Context);
-  const handleChange = e => {
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -29,16 +26,16 @@ const AddCertfiedSeeds = () => {
       certificateNumber: "",
       tagNumber: "",
       issuedAt: "",
-      expiresAt: "",
+      expiresAt: ""
     });
-  }
+  };
 
   const add = () => {
-    var cdata=formData;
-    cdata.supplierID=supplierData._id;
+    var cdata = formData;
+    cdata.supplierID = supplierData._id;
     console.log("CDATA : " + cdata);
-      addCertifiedSeeds(cdata)
-      .then(res=>{
+    addCertifiedSeeds(cdata)
+      .then((res) => {
         if (res.status === 200) {
           console.log(res);
           setFullScreenLoader(false);
@@ -53,11 +50,10 @@ const AddCertfiedSeeds = () => {
           console.log("From Else");
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setFullScreenLoader(false);
         console.log("From Catch");
-      })
-
+      });
   };
 
   return (
@@ -92,6 +88,7 @@ const AddCertfiedSeeds = () => {
                     control={Input}
                     label="Validity From"
                     required
+                    type="date"
                     name="issuedAt"
                     onChange={handleChange}
                     placeholder="Validity From"
@@ -100,6 +97,8 @@ const AddCertfiedSeeds = () => {
                     control={Input}
                     label="Expires At"
                     required
+                    type="date"
+                    min="2020-08-20"
                     name="expiresAt"
                     onChange={handleChange}
                     placeholder="Expires At"
