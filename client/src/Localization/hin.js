@@ -21,6 +21,7 @@ export default {
     address: "पता",
     // Farmerhome
     sresults: "के लिए खोज परिणाम",
+    myOrders: "मेरे आदेश",
     //FarmerHeader
     searchPlace: "यहां खोज उत्पाद...!",
     // ProductDescription

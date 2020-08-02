@@ -23,6 +23,7 @@ export default {
     searchPlace: "Search Products Here...!",
     // Farmerhome
     sresults: "Search results for",
+    myOrders: "My Orders",
     // ProductDescription
     cart: "Add to Cart",
     buy: "BUY NOW",
