@@ -77,7 +77,37 @@ const FarmerHeader = (props) => {
       key: "odia",
       text: "ଓଡିଆ",
       value: "odia"
-    }
+    },
+    {
+      key: "gujarati",
+      text: "ગુજરાતી",
+      value: "gujarati"
+    },
+    {
+      key: "kannada",
+      text: "ಕನ್ನಡ",
+      value: "kannada"
+    },{
+      key: "tamil",
+      text: "தமிழ்",
+      value: "tamil"
+    },{
+      key: "telugu",
+      text: "తెలుగు",
+      value: "telugu"
+    },{
+      key: "punjabi",
+      text: "ਪੰਜਾਬੀ",
+      value: "punjabi"
+    },{
+      key: "marathi",
+      text: "मराठी",
+      value: "marathi"
+    },{
+      key: "bengali",
+      text: "বাংলা",
+      value: "bengali"
+    },
   ];
 
   return (

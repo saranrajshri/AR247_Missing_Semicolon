@@ -4,6 +4,13 @@ import english from "./lang/en"
 import hindi from "./lang/hin"
 import odia from "./lang/odia"
 import gujarati from "./lang/gujarati"
+import kannada from "./lang/kannada"
+import tamil from "./lang/tamil"
+import telugu from "./lang/telugu"
+import punjabi from "./lang/punjabi"
+import marathi from "./lang/marathi"
+import bengali from "./lang/bengali"
+
 
 
 // the translations
@@ -13,6 +20,12 @@ const resources = {
   hin: hindi,
   odia: odia,
   gujarati: gujarati,
+  kannada:kannada,
+  tamil:tamil,
+  telugu:telugu,
+  punjabi:punjabi,
+  marathi:marathi,
+  bengali:bengali,
 };
 
 i18n
