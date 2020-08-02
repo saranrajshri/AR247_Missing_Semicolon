@@ -14,6 +14,9 @@ const CertifiedSeedsSchema = new Schema({
     type: String,
     required: true
   },
+  barCode: {
+    type: String
+  },
   expiresAt: {
     type: String,
     required: true

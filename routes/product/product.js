@@ -91,6 +91,8 @@ product.getAll = async (req, res, next) => {
 product.addCertifiedSeed = async (req, res, next) => {
   try {
     const seed = new CertifiedSeed(req.body);
+    const count = await CertifiedSeed.find({}).count();
+    seed.barCode = "BSC" + parseInt(count + 1);
     const saved = await seed.save();
 
     res.send(saved);
