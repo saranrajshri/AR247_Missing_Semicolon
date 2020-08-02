@@ -22,7 +22,7 @@ const ManageOrders = () => {
     },
     {
       text: "Stopped",
-      quanity: liveUpdates.allVehicles - liveUpdates.onMove,
+      quanity: 0,
       classColor: "text-red",
       color: "#ff3939"
     }
@@ -37,7 +37,7 @@ const ManageOrders = () => {
         <div className="grid-item">
           <div className="card">
             <div className="card-content flex-row">
-              {vehicleCat.map((cat) => (
+              {vehicleCat.map(cat => (
                 <div className="card card-border-shadow block-card">
                   <div className="card-content">
                     <div className="justify-center">

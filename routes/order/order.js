@@ -82,8 +82,8 @@ const sendSMS = message => {
   client.messages
     .create({
       from: "+12029335106",
-      to: "+916383909320",
-      body: message
+      to: "+919500149967",
+      body: message + "Supplier - +911234567890, Driver - +910987654321"
     })
     .then(messsage => console.log(message.sid));
 };
