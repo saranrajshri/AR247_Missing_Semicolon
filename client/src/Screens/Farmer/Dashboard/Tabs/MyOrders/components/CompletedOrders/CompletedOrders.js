@@ -3,13 +3,18 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 
 const CompletedOrders = ({ orders }) => {
   const { t, i18n } = useTranslation();
+  const history = useHistory();
   return (
     <div style={{ marginRight: "7px", marginLeft: "7px" }}>
       {orders.map((order) => (
-        <div className="card">
+        <div
+          className="card"
+          onClick={() => history.push("/farmer/orders/orderReceipt")}
+        >
           <div className="card-header">{order.orderID}</div>
           <div className="card-content">
             <p
