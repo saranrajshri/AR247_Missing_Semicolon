@@ -3,64 +3,38 @@ import React, { useState, useContext } from "react";
 // Semantic UI
 import { Form, Input, TextArea, Button, Divider } from "semantic-ui-react";
 
-// Actions
-
-import {addCertifiedSeeds} from "../../../../../actions/actions"
-
 // Font Awesome Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle, faEraser } from "@fortawesome/free-solid-svg-icons";
 import { Context } from "../../../../../Context/Context";
 
-
-
 const AddCertfiedSeeds = () => {
   const [formData, setFormData] = useState({
     certificateNumber: "",
     tagNumber: "",
-    issuedAt: "",
     expiresAt: "",
+    issuedDate: ""
   });
 
-  const { setAlert, setFullScreenLoader,supplierData } = useContext(Context);
+  const { setAlert, setFullScreenLoader } = useContext(Context);
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const clear = () => {
-    setFormData({
-      certificateNumber: "",
-      tagNumber: "",
-      issuedAt: "",
-      expiresAt: "",
-    });
+  const sleep = milliseconds => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
   };
 
   const add = () => {
-      var cdata=formData;
-      cdata.supplierID=supplierData._id;
-      console.log("CDATA : " + cdata);
-        addCertifiedSeeds(cdata)
-        .then(res=>{
-          if (res.status === 200) {
-            console.log(res);
-            setFullScreenLoader(false);
-            setAlert({
-              alertType: "positive",
-              isOpen: true,
-              message: "Added to Inventory"
-            });
-            clear();
-          } else {
-            setFullScreenLoader(false);
-            console.log("From Else");
-          }
-        })
-        .catch(err => {
-          setFullScreenLoader(false);
-          console.log("From Catch");
-        })
-
+    setFullScreenLoader(true);
+    sleep(1000).then(() => {
+      setAlert({
+        isOpen: true,
+        message: "Product added to inventory..",
+        alertType: "positive"
+      });
+      setFullScreenLoader(false);
+    });
   };
 
   return (
@@ -95,7 +69,7 @@ const AddCertfiedSeeds = () => {
                     control={Input}
                     label="Validity From"
                     required
-                    name="issuedAt"
+                    name="issuedDate"
                     onChange={handleChange}
                     placeholder="Validity From"
                   />
