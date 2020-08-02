@@ -14,7 +14,8 @@ import {
   ProductDescription,
   Checkout,
   CartScreen,
-  MyOrders
+  MyOrders,
+  OrderReceipt
 } from "./Screens/Farmer/Dashboard/Tabs";
 
 import DriverLogin from "./Screens/Driver/Login/Login";
@@ -84,6 +85,11 @@ const Routes = () => {
           <PrivateRoute path="/farmer/checkout" exact component={Checkout} />
           <PrivateRoute path="/farmer/cart" exact component={CartScreen} />
           <PrivateRoute path="/farmer/orders" exact component={MyOrders} />
+          <PrivateRoute
+            path="/farmer/orders/orderReceipt"
+            exact
+            component={OrderReceipt}
+          />
         </Switch>
       </Router>
     </div>
