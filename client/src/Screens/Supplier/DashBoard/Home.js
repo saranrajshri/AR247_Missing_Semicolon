@@ -36,6 +36,7 @@ import {
 
 import socketIOClient from "socket.io-client";
 import constants from "../../../Constants/constants";
+import Overview from "./Tabs/Overview/Overview";
 
 const socket = socketIOClient(`${constants.SOCKET_ENDPOINT}`);
 socket.on("connect", () => {
@@ -67,7 +68,8 @@ const Home = () => {
     ManageOrders: ManageOrders,
     IncomingOrders: IncomingOrders,
     Settings: Settings,
-    Notifications: Notifications
+    Notifications: Notifications,
+    Overview: Overview
   };
   var Component = mapping[selectedComponent];
 

@@ -211,7 +211,7 @@ supplier.getNotifications = async (req, res, next) => {
     console.log(req.body);
     const notification = await Notifications.find({
       supplierID: req.body.supplierID
-    });
+    }).sort({});
     client.emit("notifications", notification);
     res.send(notification);
   } catch (err) {
