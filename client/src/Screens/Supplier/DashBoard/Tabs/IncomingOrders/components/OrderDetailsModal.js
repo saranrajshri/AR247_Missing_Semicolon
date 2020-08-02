@@ -2,18 +2,62 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Modal, Table } from "semantic-ui-react";
 import TrackOrderMap from "./TrackOrderMap";
+import { makeStyles } from "@material-ui/core/styles";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import "../IncomingOrders.css";
 /**
  * Modal showing order details of tracking order.
  * @param {Props} props
  */
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%"
+  },
+  resetContainer: {
+    padding: theme.spacing(3)
+  },
+  stepTime: {
+    fontSize: "10px",
+    color: "#777777",
+    paddingLeft: "10px",
+    fontStyle: "italic"
+  }
+}));
+
 const OrderDetailsModal = (props) => {
   const { orderDetails, visible, onClose, drivers } = props;
   const [order, setOrder] = useState(orderDetails);
   const [driver, setDriver] = useState({ driverName: "", primaryContact: 11 });
+  const [steps, setSteps] = useState([]);
+  const classes = useStyles();
+  const [activeStep, setActiveStep] = React.useState(2);
 
   useEffect(() => {
     const setOrderDetails = () => {
       setOrder(orderDetails);
+      setSteps(() => [
+        {
+          l: orderDetails.tripData.pickUpLocationName,
+          t: orderDetails.orderPickedTime
+        },
+        {
+          l: orderDetails.tripData.checkpoints[0].locationName,
+          t: orderDetails.tripData.checkpoints[0].checkinTime
+        },
+        {
+          l: orderDetails.tripData.checkpoints[1].locationName,
+          t: orderDetails.tripData.checkpoints[1].checkinTime
+        },
+        {
+          l: orderDetails.tripData.dropLocationName,
+          t: orderDetails.orderDeliveredTime
+        }
+      ]);
     };
     setOrderDetails();
   }, [orderDetails]);
@@ -50,13 +94,49 @@ const OrderDetailsModal = (props) => {
             />
           </div>
           <div className="grid-items grid-details">
-            <img
-              src="https://i.ibb.co/MsZSMDn/truck.jpg"
-              width="100%"
-              height="200px"
-              alt="truck"
-            />
+            <div className={classes.root}>
+              <Stepper activeStep={activeStep} orientation="vertical">
+                {steps.map((step, index) => (
+                  <Step key={step.l}>
+                    <StepLabel>
+                      {step.l}
+                      {(index === 0 || index === 1) && (
+                        <span className={classes.stepTime}>{step.t}</span>
+                      )}
+                    </StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+              {activeStep === steps.length && (
+                <Paper square elevation={0} className={classes.resetContainer}>
+                  <Typography>Delivery finished</Typography>
+                </Paper>
+              )}
+            </div>
             <div className="ship-details">
+              <p className="ship-label">trip info</p>
+              <div className="ship-info">
+                <p>
+                  From: <span>{order.restTime.endTime.substring(0, 7)}</span>
+                </p>
+                <p>
+                  Time: <span>{order.restTime.startTime.substring(0, 7)}</span>
+                </p>
+                <p>
+                  Rest Time:{" "}
+                  <span>
+                    {(
+                      parseFloat(
+                        order.restTime.endTime.substring(0, 5)
+                      ).toFixed(2) -
+                      parseFloat(
+                        order.restTime.startTime.substring(0, 5)
+                      ).toFixed(2)
+                    ).toFixed(2) * 100}{" "}
+                    min
+                  </span>
+                </p>
+              </div>
               <p className="ship-label">customer details</p>
               <div className="ship-info">
                 <p>
@@ -166,14 +246,15 @@ OrderDetailsModal.defaultProps = {
     },
     tripData: {
       baseTime: 1,
-      checkpoints: [],
+      checkpoints: [{ locationName: "" }],
       distance: 1,
       dropCoordinates: [14, 79],
       dropLocationName: "",
       labels: [],
       pickUpCoordinates: { lat: 13, lon: 80 },
       pickUpLocationName: ""
-    }
+    },
+    restTime: { startTime: "", endTime: "" }
   },
   drivers: [
     {

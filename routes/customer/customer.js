@@ -1,5 +1,6 @@
 const Customer = require("../../models/CustomerSchema");
 const Product = require("../../models/ProductsSchema");
+const FeedBack = require("../../models/FeedbackSchema");
 const createError = require("http-errors");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
@@ -168,6 +169,27 @@ customer.isCustomerAuthenticated = (req, res, next) => {
 
       res.send(customerData);
     });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// get the orders of the customer
+customer.getOrdersOfCustomer = async (req, res, next) => {
+  try {
+    const orders = await Customer.find({ _id: req.params.customerID });
+    res.send(orders);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// add feedback
+customer.addFeedback = async (req, res, next) => {
+  try {
+    const feedback = new FeedBack(req.body);
+    const savedFeedback = await feedback.save();
+    res.send(savedFeedback);
   } catch (err) {
     next(err);
   }

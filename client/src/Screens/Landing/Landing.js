@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Landing.css";
 import { useHistory } from "react-router-dom";
 import { Button } from "semantic-ui-react";
@@ -7,6 +7,7 @@ import { faLeaf, faHandPointDown } from "@fortawesome/free-solid-svg-icons";
 /**
  * Landing page.
  */
+
 const Landing = () => {
   const history = useHistory();
   return (

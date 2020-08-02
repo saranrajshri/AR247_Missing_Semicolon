@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./CurrentOrders.css";
 import { Card, CardContent, Button, Divider } from "semantic-ui-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,15 +6,22 @@ import {
   faMapMarkerAlt,
   faRupeeSign,
   faPhoneAlt,
-  faCheckCircle
+  faCheckCircle,
+  faPause,
+  faPlay
 } from "@fortawesome/free-solid-svg-icons";
 import { DriverContext } from "../../../../Context/DriverContext";
-import { markAsDelivered } from "../../../../actions/actions";
+import {
+  markAsDelivered,
+  updateNotification
+} from "../../../../actions/actions";
 import { useToast } from "../../../../Context/ToastContext";
 
 const CurrentOrders = () => {
-  const { orders, watchDriverPosition } = useContext(DriverContext);
+  const { driverData, orders, watchDriverPosition } = useContext(DriverContext);
   const { addToast } = useToast();
+
+  const [isTripPaused, setPause] = useState(false);
 
   const openGoogleMaps = (pickUpLocationName, dropLocationName) => {
     const pickUpLocation = pickUpLocationName.replace(" ", "+");
@@ -59,6 +66,42 @@ const CurrentOrders = () => {
       // addToast({});
       watchDriverPosition(order.supplierID, order.orderID);
       // window.location.reload();
+    });
+  };
+
+  const pauseTrip = supplierID => {
+    setPause(!isTripPaused);
+    addToast({
+      type: "success",
+      message: isTripPaused ? "Trip Paused" : "Trip Resumed"
+    });
+    var data = {
+      title: isTripPaused
+        ? `Driver ID ${driverData.driverID} - Paused`
+        : `Driver ID ${driverData.driverID} - Resumed the trip`,
+
+      message: isTripPaused
+        ? `Driver ID ${driverData.driverID} - has paused his location sharing`
+        : `Driver ID ${driverData.driverID} - has resumed his location sharing`,
+      supplierID: supplierID
+    };
+    updateNotification(data).then(res => {
+      console.log(res.data);
+    });
+  };
+
+  const reportProblem = supplierID => {
+    var data = {
+      title: `Driver has reported a problem`,
+      message: `Driver ID - ${driverData.driverID} has reported a problem...Contact him ASAP`,
+      supplierID: supplierID
+    };
+    updateNotification(data).then(res => {
+      console.log(res.data);
+      addToast({
+        type: "success",
+        message: "Problem Reported Successfully...!"
+      });
     });
   };
 
@@ -133,6 +176,25 @@ const CurrentOrders = () => {
                 <div className="grid-container">
                   <div className="grid-item">
                     <p className="text-bold text-dark-blue">Supplier Contact</p>
+                    {isTripPaused ? (
+                      <Button
+                        primary
+                        onClick={() => pauseTrip(order.supplierID)}
+                        color="green"
+                      >
+                        <FontAwesomeIcon icon={faPlay} className="icon" />
+                        Resume Trip
+                      </Button>
+                    ) : (
+                      <Button
+                        primary
+                        onClick={() => pauseTrip(order.supplierID)}
+                        color="red"
+                      >
+                        <FontAwesomeIcon icon={faPause} className="icon" />
+                        Pause Trip
+                      </Button>
+                    )}
                     <Button primary>
                       <FontAwesomeIcon icon={faPhoneAlt} className="icon" />
                       Call Supplier
@@ -153,7 +215,12 @@ const CurrentOrders = () => {
                 <Divider />
                 <div className="grid-container">
                   <div className="grid-item">
-                    <Button color="red">Report a problem</Button>
+                    <Button
+                      color="red"
+                      onClick={() => reportProblem(order.supplierID)}
+                    >
+                      Report a problem
+                    </Button>
                   </div>
                   <div className="grid-item">
                     <div className="float-right-container">

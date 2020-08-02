@@ -13,7 +13,8 @@ import {
   CalculateTripCost,
   AssignDrivers,
   IncomingOrders,
-  Settings
+  Settings,
+  Notifications,
 } from "./Tabs";
 
 // Context
@@ -29,11 +30,13 @@ import {
   getDriversOfASupplier,
   getOrdersOfASupplier,
   isSupplierAuthenticated,
-  getLiveUpdates
+  getLiveUpdates,
+  getNotificationsOfASupplier,
 } from "../../../actions/actions";
 
 import socketIOClient from "socket.io-client";
 import constants from "../../../Constants/constants";
+import Overview from "./Tabs/Overview/Overview";
 
 const socket = socketIOClient(`${constants.SOCKET_ENDPOINT}`);
 socket.on("connect", () => {
@@ -51,7 +54,8 @@ const Home = () => {
     setOrders,
     setFullScreenLoader,
     setSupplierData,
-    setLiveUpdates
+    setNotifications,
+    setLiveUpdates,
   } = useContext(Context);
 
   // Components mapping
@@ -63,24 +67,31 @@ const Home = () => {
     AssignDrivers: AssignDrivers,
     ManageOrders: ManageOrders,
     IncomingOrders: IncomingOrders,
-    Settings: Settings
+    Settings: Settings,
+    Notifications: Notifications,
+    Overview: Overview,
   };
   var Component = mapping[selectedComponent];
 
   // Socket Listeners
   const initializeSocketListeners = () => {
     // listener to receive real time products data
-    socket.on("products", products => {
+    socket.on("products", (products) => {
       setProducts(products);
     });
 
-    socket.on("drivers", drivers => {
+    socket.on("drivers", (drivers) => {
       setDrivers(drivers);
     });
-    socket.on("orders", orders => {
-      setOrders(orders);
+    socket.on("orders", (orders) => {
+      // setOrders(orders);
     });
-    socket.on("liveUpdates", liveUpdates => {
+    socket.on("notifications", (notifications) => {
+      // setOrders(orders);
+      setNotifications(notifications);
+      // console.log(notifications);
+    });
+    socket.on("liveUpdates", (liveUpdates) => {
       setLiveUpdates(liveUpdates);
     });
   };
@@ -88,12 +99,17 @@ const Home = () => {
   const supplierAuth = async () => {
     setFullScreenLoader(true);
     await isSupplierAuthenticated()
-      .then(res => {
+      .then((res) => {
         setFullScreenLoader(false);
         setSupplierData(res.data);
         getProductsOfASupplier(res.data._id);
         getDriversOfASupplier(res.data._id);
-        getOrdersOfASupplier(res.data._id);
+        getNotificationsOfASupplier(res.data._id).then((res) => {
+          console.log(res.data);
+        });
+        getOrdersOfASupplier(res.data._id).then((res) => {
+          setOrders(res.data);
+        });
         getLiveUpdates(res.data._id);
       })
       .catch(() => {

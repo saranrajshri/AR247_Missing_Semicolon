@@ -21,6 +21,7 @@ export default {
     address: "पता",
     // Farmerhome
     sresults: "के लिए खोज परिणाम",
+    myOrders: "मेरे आदेश",
     //FarmerHeader
     searchPlace: "यहां खोज उत्पाद...!",
     // ProductDescription
@@ -52,6 +53,20 @@ export default {
     enterPass: "अपना पासवर्ड डालें",
     login: "लॉग इन करें",
     signUp: "साइन अप करें",
-    forgotPass: "पासवर्ड भूल गए?"
+    forgotPass: "पासवर्ड भूल गए?",
+     // My Orders
+     orderStatus : "आदेश की स्थिति",
+     dispatched: "भेजा",
+     trackOrder : "ऑर्डर पर नज़र रखें",
+     oProcess : "आदेश संसाधित",
+     oProcessDesc : "आपका आदेश सफलतापूर्वक संसाधित हो गया है",
+     disDesc: "आपका आदेश जारी है...",
+     oRec : "आदेश प्राप्त",
+     awaCon : "(पुष्टिकरण की प्रतीक्षा)",
+     close : "बंद करे",
+     currentOrders: "वर्तमान आदेश",
+    completedOrders : "पूर्ण आदेश",
+    pName : "उत्पाद का नाम",
+    tPrice : "कुल कीमत",
   }
 };

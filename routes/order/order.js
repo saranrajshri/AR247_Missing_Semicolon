@@ -39,15 +39,30 @@ const reverseGeoCoder = async coordinates => {
 };
 
 const fetchOrdersOfASupplier = (req, supplierID) => {
-  var client = req.app.get("client");
-  Order.find({ supplierID: supplierID })
-    .sort({ orderID: -1 })
-    .then(orders => {
-      client.emit("orders", orders);
+  // var client = req.app.get("client");
+  // Order.find({ supplierID: supplierID })
+  //   .sort({ orderID: -1 })
+  //   .then(orders => {
+  //     client.emit("orders", orders);
+  //   })
+  //   .catch(() => {
+  //     client.emit("orders", []);
+  //   });
+};
+
+const sendSMS = message => {
+  const client = require("twilio")(
+    "AC987642e062b8abd817200b4f5021148c",
+    "749e71e33617dccde9cb37688e3ac9ea"
+  );
+
+  client.messages
+    .create({
+      from: "+12029335106",
+      to: "+916383909320",
+      body: message
     })
-    .catch(() => {
-      client.emit("orders", []);
-    });
+    .then(messsage => console.log(message.sid));
 };
 
 const fetchLiveUpdates = async (req, supplierID) => {
@@ -141,6 +156,7 @@ const placeOrder = async (req, res, orderData) => {
               fetchLiveUpdates(req, req.params.supplierID);
 
               res.status(200).send(response);
+              sendSMS("Your Order Has been placed successfully");
             })
             .catch(() => {
               res.send(err);
@@ -202,7 +218,15 @@ order.add = async (req, res) => {
 
 // get orders of a supplier
 order.getOrdersOfASupplier = (req, res) => {
-  fetchOrdersOfASupplier(req, req.params.supplierID);
+  Order.find({ supplierID: req.params.supplierID })
+    .sort({ orderID: -1 })
+    .then(orders => {
+      res.send(orders);
+    })
+    .catch(err => {
+      res.send(err);
+    });
+  // fetchOrdersOfASupplier(req, req.params.supplierID);
 };
 
 // dispatch a order
@@ -219,6 +243,7 @@ order.dispatch = (req, res) => {
     .then(() => {
       fetchOrdersOfASupplier(req, req.params.supplierID); // emit new changes through socket
       fetchLiveUpdates(req, req.params.supplierID);
+      sendSMS("Your Order Has been dispatched to our delivery executive");
 
       res.status(200).send({ message: "Order Dispatched Successfully" });
     })
@@ -232,7 +257,7 @@ order.markAsPicked = async (req, res, next) => {
   try {
     const order = await Order.findOneAndUpdate(
       { isOrderAssigned: true, orderID: req.params.orderID },
-      { isOrderDispatched: true }
+      { orderPickedTime: new Date(), isOrderDispatched: true }
     );
     const driver = await Driver.findOneAndUpdate(
       { driverID: req.params.driverID },
@@ -244,6 +269,9 @@ order.markAsPicked = async (req, res, next) => {
     }
     fetchOrdersOfASupplier(req, req.params.supplierID);
     fetchLiveUpdates(req, req.params.supplierID);
+    sendSMS(
+      "Your Order Has been received by the driver and he has started the trip"
+    );
 
     res.send(order);
   } catch (err) {
@@ -259,13 +287,16 @@ order.markAsCompleted = async (req, res, next) => {
         isOrderDispatched: true,
         orderID: req.params.orderID
       },
-      { isOrderDelivered: true }
+      { orderDeliveredTime: new Date(), isOrderDelivered: true }
     );
     if (!order) {
       throw createError(422, "Order is not assigned/ dispatched");
     }
     fetchOrdersOfASupplier(req, req.params.supplierID);
     fetchLiveUpdates(req, req.params.supplierID);
+    sendSMS(
+      "Your Order Has been delivered successfully. If there is any problem, contact us or report through the app"
+    );
 
     res.send(order);
   } catch (err) {

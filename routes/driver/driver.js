@@ -1,9 +1,12 @@
 const Driver = require("../../models/DriversSchema");
 const Order = require("../../models/OrdersSchema");
+const Notifications = require("../../models/NotificationsSchema");
 const createError = require("http-errors");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 let driver = (module.exports = {});
+const supplier = require("../supplier/supplier");
+
 const config = require("../../config/database.json")[
   process.env.NODE_ENV || "development"
 ];
@@ -135,6 +138,25 @@ driver.isDriverAuthenticated = (req, res, next) => {
 
       res.send(driverData);
     });
+  } catch (err) {
+    next(err);
+  }
+};
+
+// update notifications to supplier
+driver.updateNotifications = async (req, res, next) => {
+  try {
+    const { message, title, supplierID } = req.body;
+    const data = {
+      message,
+      title,
+      supplierID,
+      timeStamp: new Date()
+    };
+    const newNotification = new Notifications(data);
+    const saved = await newNotification.save();
+    supplier.getNotifications(req, res, next);
+    res.send(saved);
   } catch (err) {
     next(err);
   }
