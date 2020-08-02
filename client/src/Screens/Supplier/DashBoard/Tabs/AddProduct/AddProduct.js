@@ -40,12 +40,12 @@ const AddProduct = () => {
   const [error, setError] = useState(null);
 
   // Set data to state
-  const handleChange = (e) => {
+  const handleChange = e => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
 
   // update checkbox data to state
-  const handleCheckBox = (value) => {
+  const handleCheckBox = value => {
     setProduct({ ...product, isHidden: value });
   };
 
@@ -68,11 +68,10 @@ const AddProduct = () => {
 
   const options = [
     { key: "0", text: "BAC0001", value: "BAC0001" },
-    { key: "1", text: "BAC0002", value: "BAC0002" },
-    { key: "2", text: "BAC0003", value: "BAC0003" }
+    { key: "1", text: "BAC0002", value: "BAC0002" }
   ];
 
-  const triggerImageUpload = (e) => {
+  const triggerImageUpload = e => {
     try {
       imageUploadRef.current._handleSubmit(e);
     } catch {
@@ -86,14 +85,14 @@ const AddProduct = () => {
 
   // This function will be triggered from the imageUpload Component
   // Add product to DB
-  const submit = (imageURL) => {
+  const submit = imageURL => {
     setFullScreenLoader(true);
     if (imageURL !== "") {
       var productData = product;
       productData.supplierID = supplierData._id;
       productData.imageURL = imageURL;
       addProduct(productData)
-        .then((res) => {
+        .then(res => {
           if (res.status === 200) {
             imageUploadRef.current._clearState();
             setFullScreenLoader(false);
@@ -109,7 +108,7 @@ const AddProduct = () => {
             setError({ content: "Failed to add product", pointer: "above " });
           }
         })
-        .catch((err) => {
+        .catch(err => {
           setFullScreenLoader(false);
           setError({ content: "Barcode already exists", pointer: "above " });
         });
@@ -183,7 +182,7 @@ const AddProduct = () => {
                 <Form.Checkbox
                   checked={!product.isHidden}
                   name="isHidden"
-                  onChange={(e) => {
+                  onChange={e => {
                     handleCheckBox(!product.isHidden);
                   }}
                   label="Publish Now"

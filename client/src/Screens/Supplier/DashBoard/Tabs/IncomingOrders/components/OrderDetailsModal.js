@@ -14,7 +14,7 @@ import "../IncomingOrders.css";
  * @param {Props} props
  */
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     width: "100%"
   },
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const OrderDetailsModal = (props) => {
+const OrderDetailsModal = props => {
   const { orderDetails, visible, onClose, drivers } = props;
   const [order, setOrder] = useState(orderDetails);
   const [driver, setDriver] = useState({ driverName: "", primaryContact: 11 });
@@ -64,7 +64,7 @@ const OrderDetailsModal = (props) => {
 
   useEffect(() => {
     const setDriverDetail = () => {
-      let driv = drivers.find((d) => d.driverID === order.driverID);
+      let driv = drivers.find(d => d.driverID === order.driverID);
       if (driv !== undefined) {
         setDriver(driv);
       }
@@ -117,10 +117,10 @@ const OrderDetailsModal = (props) => {
               <p className="ship-label">trip info</p>
               <div className="ship-info">
                 <p>
-                  From: <span>{order.restTime.endTime.substring(0, 7)}</span>
+                  From: <span>{order.restTime.startTime.substring(0, 7)}</span>
                 </p>
                 <p>
-                  Time: <span>{order.restTime.startTime.substring(0, 7)}</span>
+                  End: <span>{order.restTime.endTime.substring(0, 7)}</span>
                 </p>
                 <p>
                   Rest Time:{" "}
@@ -175,7 +175,7 @@ const OrderDetailsModal = (props) => {
                     </Table.Row>
                   </Table.Header>
                   <Table.Body>
-                    {order.orderData.products.map((product) => {
+                    {order.orderData.products.map(product => {
                       return (
                         <Table.Row
                           key={product.barCode}
