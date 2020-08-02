@@ -25,6 +25,11 @@ export const getLiveUpdates = supplierID => {
   return res;
 };
 
+export const addCertifiedSeeds = cdata => {
+  var res = axios.post(`${constants.BASE_URL}/supplier/addCertifiedSeeds`, cdata);
+  return res;
+};
+
 /**
  *
  * @param {Object} regiterData
