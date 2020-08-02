@@ -21,6 +21,18 @@ const CertifiedSeedsSchema = new Schema({
     type: String,
     required: true
   },
+  producerName: {
+    type: String
+  },
+  producerAddress: {
+    type: String
+  },
+  producerContact: {
+    type: String
+  },
+  quantity: {
+    type: String
+  },
   supplierID: {
     type: String,
     required: true
