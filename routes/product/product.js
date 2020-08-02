@@ -1,6 +1,7 @@
 // Schema
 const Product = require("../../models/ProductsSchema");
 const Supplier = require("../../models/SupplierSchema");
+const CertifiedSeed = require("../../models/CertifiedSeeds");
 
 let product = (module.exports = {});
 
@@ -81,6 +82,18 @@ product.getAll = async (req, res, next) => {
   try {
     const products = await Product.find({ isHidden: false });
     res.send(products);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// add certified seed
+product.addCertifiedSeed = async (req, res, next) => {
+  try {
+    const seed = new CertifiedSeed(req.body);
+    const saved = await seed.save();
+
+    res.send(saved);
   } catch (err) {
     next(err);
   }

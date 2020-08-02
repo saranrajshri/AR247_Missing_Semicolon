@@ -36,6 +36,7 @@ router
     "/supplier/product/getProductsOfASupplier/:supplierID",
     product.getProductsOfASupplier
   )
+  .post("/supplier/addCertifiedSeeds", product.addCertifiedSeed)
   .get("/customer/product/getAll", product.getAll);
 
 // Driver Routes
