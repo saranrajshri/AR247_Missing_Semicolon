@@ -1,9 +1,11 @@
 import React from 'react'
 import { Button, Header, Image, Modal,Icon, Step } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next';
 
 function DetailsModal() {
   const [open, setOpen] = React.useState(false)
-
+  
+  const { t, i18n } = useTranslation();
   return (
     <Modal
       onClose={() => setOpen(false)}
@@ -18,10 +20,10 @@ function DetailsModal() {
                 marginRight: "auto"
               }}
             >
-              Track Order
+              {t('trackOrder')}
             </Button>}
     >
-      <Modal.Header>Track Order</Modal.Header>
+      <Modal.Header>{t('trackOrder')}</Modal.Header>
       <Modal.Content image>
         <Image size='medium' src='https://5.imimg.com/data5/WC/QH/MY-45792250/jute-seeds-250x250.jpg' style={{
               width: "75%",
@@ -40,24 +42,24 @@ function DetailsModal() {
     <Step>
       <Icon name='handshake' />
       <Step.Content>
-        <Step.Title>Order Processed</Step.Title>
-        <Step.Description>Your Order has been Successfully Processed</Step.Description>
+        <Step.Title>{t('oProcess')}</Step.Title>
+        <Step.Description>{t('oProcessDesc')}</Step.Description>
       </Step.Content>
     </Step>
 
     <Step active>
       <Icon name='truck' />
       <Step.Content>
-        <Step.Title>Dispatched</Step.Title>
-        <Step.Description>Your Order is on the way...</Step.Description>
+        <Step.Title>{t('dispatched')}</Step.Title>
+        <Step.Description>{t('disDesc')}</Step.Description>
       </Step.Content>
     </Step>
 
     <Step disabled>
       <Icon name='info' />
       <Step.Content>
-        <Step.Title>Order Received</Step.Title>
-        <Step.Description>(Awaiting Confirmation)</Step.Description>
+        <Step.Title>{t('oRec')}</Step.Title>
+        <Step.Description>{t('awaCon')}</Step.Description>
 
       </Step.Content>
     </Step>
@@ -67,7 +69,7 @@ function DetailsModal() {
       <Modal.Actions>
         <Button
           icon='close'
-          content="Close"
+          content={t('close')}
           labelPosition='center'
           onClick={() => setOpen(false)}
           negative

@@ -2,8 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRupeeSign } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from 'react-i18next';
 
 const CompletedOrders = ({ orders }) => {
+  const { t, i18n } = useTranslation();
   return (
     <div style={{ marginRight: "7px", marginLeft: "7px" }}>
       {orders.map((order) => (
@@ -11,7 +13,7 @@ const CompletedOrders = ({ orders }) => {
           <div className="card-header">{order.orderID}</div>
           <div className="card-content">
             <p style={{ fontSize: "18px", color: "#888888" }}>
-              Product Name:{" "}
+              {t('pName')}:{" "}
               <span
                 style={{
                   fontSize: "17px",
@@ -23,7 +25,7 @@ const CompletedOrders = ({ orders }) => {
               </span>
             </p>
             <p style={{ fontSize: "17 px", color: "#888888" }}>
-              Total Price:{" "}
+              {t('tPrice')}:{" "}
               <span
                 style={{
                   fontSize: "17px",
