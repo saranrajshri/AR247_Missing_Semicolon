@@ -13,7 +13,8 @@ import FarmerHome from "./Screens/Farmer/Dashboard/FarmerHome";
 import {
   ProductDescription,
   Checkout,
-  CartScreen
+  CartScreen,
+  MyOrders
 } from "./Screens/Farmer/Dashboard/Tabs";
 
 import Driver from "./Screens/Driver/Driver";
@@ -33,11 +34,11 @@ const Routes = () => {
   useEffect(() => {
     const checkCustomer = () => {
       checkCustomerAuthentication()
-        .then(res => {
+        .then((res) => {
           // console.log(res.data);
           setFarmerData(res.data);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           setFarmerData({});
           localStorage.removeItem("CUSTOMER_AUTH_TOKEN");
@@ -45,10 +46,10 @@ const Routes = () => {
     };
     const checkDriver = () => {
       checkDriverAuthentication()
-        .then(res => {
+        .then((res) => {
           setDriverData(res.data);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           setDriverData({});
           localStorage.removeItem("DRIVER_AUTH_TOKEN");
@@ -82,6 +83,7 @@ const Routes = () => {
           />
           <PrivateRoute path="/farmer/checkout" exact component={Checkout} />
           <PrivateRoute path="/farmer/cart" exact component={CartScreen} />
+          <PrivateRoute path="/farmer/orders" exact component={MyOrders} />
         </Switch>
       </Router>
     </div>
