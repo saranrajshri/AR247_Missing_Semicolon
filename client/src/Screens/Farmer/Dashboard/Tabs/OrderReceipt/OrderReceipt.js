@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Card, Button, Icon, Form, TextArea } from "semantic-ui-react";
+import {
+  Card,
+  Button,
+  Icon,
+  Form,
+  TextArea,
+  Dropdown,
+} from "semantic-ui-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { useToast } from "../../../../../Context/ToastContext";
@@ -15,7 +22,11 @@ const OrderReceipt = () => {
   const handleSubmit = () => {
     addToast({ type: "success", message: "Feedback submitted." });
   };
-
+  const options = [
+    { text: "Order not recieved" },
+    { text: "Damaged order" },
+    { text: "Wrong order" },
+  ];
   return (
     <div>
       <div id="farmer-header">
@@ -36,7 +47,7 @@ const OrderReceipt = () => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          marginTop: "15px"
+          marginTop: "15px",
         }}
       >
         <Card style={{ width: "90%" }}>
@@ -46,7 +57,7 @@ const OrderReceipt = () => {
                 marginLeft: "0px",
                 paddingTop: "4px",
                 paddingBottom: "7px",
-                height: "auto"
+                height: "auto",
               }}
             >
               Test product
@@ -69,7 +80,13 @@ const OrderReceipt = () => {
                 icon="arrow alternate circle down"
               />
               <Button basic color="red">
-                Problem?
+                <Dropdown
+                  options={options}
+                  text="Problem?"
+                  floating
+                  labeled
+                  error
+                ></Dropdown>
               </Button>
             </div>
           </Card.Content>

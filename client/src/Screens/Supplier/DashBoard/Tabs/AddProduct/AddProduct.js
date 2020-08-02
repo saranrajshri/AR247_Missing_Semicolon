@@ -1,7 +1,15 @@
 import React, { useState, useContext, useRef } from "react";
 
 // Semantic UI
-import { Form, Input, TextArea, Button, Divider } from "semantic-ui-react";
+import {
+  Form,
+  Input,
+  TextArea,
+  Button,
+  Divider,
+  Select,
+  Dropdown
+} from "semantic-ui-react";
 
 // Font Awesome Icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,7 +35,7 @@ const AddProduct = () => {
     productPrice: 0,
     availableQuantity: 0,
     productDescription: "",
-    isHidden: false,
+    isHidden: false
   });
   const [error, setError] = useState(null);
 
@@ -41,6 +49,10 @@ const AddProduct = () => {
     setProduct({ ...product, isHidden: value });
   };
 
+  const handleSelection = (e, { value }) => {
+    setProduct({ ...product, barCode: value });
+  };
+
   // clear the state
   const clear = () => {
     setError(null);
@@ -50,9 +62,15 @@ const AddProduct = () => {
       productPrice: 0,
       availableQuantity: 0,
       productDescription: "",
-      isHidden: false,
+      isHidden: false
     });
   };
+
+  const options = [
+    { key: "0", text: "BAC0001", value: "BAC0001" },
+    { key: "1", text: "BAC0002", value: "BAC0002" },
+    { key: "2", text: "BAC0003", value: "BAC0003" }
+  ];
 
   const triggerImageUpload = (e) => {
     try {
@@ -61,7 +79,7 @@ const AddProduct = () => {
       setAlert({
         alertType: "negative",
         isOpen: true,
-        message: "Select a valid image",
+        message: "Select a valid image"
       });
     }
   };
@@ -83,7 +101,7 @@ const AddProduct = () => {
             setAlert({
               alertType: "positive",
               isOpen: true,
-              message: "Product Added Succesfully",
+              message: "Product Added Succesfully"
             });
             clear(); // clear the state
           } else {
@@ -109,11 +127,13 @@ const AddProduct = () => {
               <Form>
                 <Form.Group widths="equal">
                   <Form.Field
-                    control={Input}
+                    control={Dropdown}
                     label="Barcode"
+                    selection
                     required
+                    options={options}
                     name="barCode"
-                    onChange={handleChange}
+                    onChange={handleSelection}
                     placeholder="Barcode"
                     value={product.barCode}
                     error={error}

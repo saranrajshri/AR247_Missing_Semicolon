@@ -4,7 +4,9 @@ export const Context = createContext();
 
 // Global state provider
 const ContextProvider = props => {
-  const [selectedComponent, setSelectedComponent] = useState("Overview");
+  const [selectedComponent, setSelectedComponent] = useState(
+    "AddCertifiedSeed"
+  );
   const [supplierData, setSupplierData] = useState({});
   const [isFullScreenLoaderVisible, setFullScreenLoader] = useState(false);
   const [isAlertOpen, setAlert] = useState({
