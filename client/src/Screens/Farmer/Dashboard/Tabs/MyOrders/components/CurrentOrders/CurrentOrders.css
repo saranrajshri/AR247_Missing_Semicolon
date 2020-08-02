@@ -1,0 +1,21 @@
+.p-name {
+  font-size: 18px;
+  font-family: openSansSemiBold;
+  margin-bottom: 0;
+}
+.p-status {
+  background-color: #0077ff;
+  color: white;
+  width: auto;
+  padding: 5px;
+  border-radius: 5px;
+  font-family: openSansSemiBold;
+}
+.p-price {
+  font-family: openSansSemiBold;
+  font-size: 17px;
+}
+.p-quantity {
+  font-size: 17px;
+  font-family: openSansSemiBold;
+}

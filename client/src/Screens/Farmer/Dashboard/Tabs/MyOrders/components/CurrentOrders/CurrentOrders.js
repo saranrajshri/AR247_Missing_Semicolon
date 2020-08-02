@@ -1,47 +1,54 @@
 import React from "react";
-import { Card, Image, GridColumn, GridRow } from "semantic-ui-react";
-import DetailsModal from "./TrackOrderModal"
-import { useTranslation } from 'react-i18next';
-const CurrentOrders = () => {
-const { t, i18n } = useTranslation();
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRupeeSign } from "@fortawesome/free-solid-svg-icons";
+import DetailsModal from "./TrackOrderModal";
+import { useTranslation } from "react-i18next";
+import "./CurrentOrders.css";
+import { Button } from "semantic-ui-react";
 
-  return (<div>
-    <GridColumn>
-      <GridRow style={{ display: "flex", justifyContent: "center" }}>
-        <Card style={{ width: "90%", marginTop: "10%" }}>
-          <Image
-            src="https://5.imimg.com/data5/WC/QH/MY-45792250/jute-seeds-250x250.jpg"
+const CurrentOrders = () => {
+  const { t, i18n } = useTranslation();
+
+  return (
+    <div>
+      <div className="card" style={{ marginLeft: "4px", marginRight: "4px" }}>
+        <div
+          className="card-header"
+          style={{ display: "flex", justifyContent: "space-between" }}
+        >
+          <span>ORD0001</span>
+          <span>01-08-2020</span>
+        </div>
+        <div className="card-content">
+          <div
             style={{
-              width: "75%",
-              display: "block",
-              marginLeft: "auto",
-              marginRight: "auto"
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginBottom: "15px"
             }}
-            wrapped
-            ui={false}
-          />
-          <Card.Content>
-            <h2>Test Product 1</h2>
-            <span style={{ paddingLeft: "10px" }}>Test</span>
-          </Card.Content>
-          <Card.Content extra></Card.Content>
-          <Card.Description
-            style={{ marginBottom: "10px", marginLeft: "35px" }}
           >
-            <span style={{ fontWeight: "bold" }}>
-              {t('orderStatus')} :
-              <span style={{ color: "green", paddingLeft: "15px" }}>
-                {t('dispatched')}
-              </span>
-            </span>
-          </Card.Description>
-          <Card.Content extra>
-            <DetailsModal/>
-          </Card.Content>
-        </Card>
-      </GridRow>
-    </GridColumn>
-  </div>)
+            <p className="p-name">Test product</p>
+            <p className="p-status">Dispatched</p>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between"
+            }}
+          >
+            <p className="p-price">
+              <FontAwesomeIcon icon={faRupeeSign} />
+              720.00
+            </p>
+            <p className="p-quantity">6 kg</p>
+          </div>
+          <DetailsModal />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default CurrentOrders;
