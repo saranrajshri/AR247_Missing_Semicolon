@@ -72,6 +72,11 @@ const FarmerHeader = (props) => {
       key: "hin",
       text: "हिन्दी",
       value: "hin"
+    },
+    {
+      key: "odia",
+      text: "ଓଡିଆ",
+      value: "odia"
     }
   ];
 
