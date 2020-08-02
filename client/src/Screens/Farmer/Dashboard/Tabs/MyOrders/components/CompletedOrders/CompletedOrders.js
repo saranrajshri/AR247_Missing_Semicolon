@@ -12,38 +12,59 @@ const CompletedOrders = ({ orders }) => {
         <div className="card">
           <div className="card-header">{order.orderID}</div>
           <div className="card-content">
-            <p style={{ fontSize: "18px", color: "#888888" }}>
+            <p
+              style={{
+                fontSize: "17px",
+                color: "#555555",
+                fontFamily: "openSansSemiBold"
+              }}
+            >
               {t("pName")}:{" "}
               <span
                 style={{
                   fontSize: "17px",
                   paddingLeft: "5px",
-                  color: "#212121"
+                  color: "#212121",
+                  fontFamily: "openSans"
                 }}
               >
                 {order.orderData.products[0].productName}
               </span>
             </p>
-            <p style={{ fontSize: "17 px", color: "#888888" }}>
+            <p
+              style={{
+                fontSize: "17px",
+                color: "#555555",
+                fontFamily: "openSansSemiBold"
+              }}
+            >
               {t("tPrice")}:{" "}
               <span
                 style={{
                   fontSize: "17px",
                   paddingLeft: "5px",
-                  color: "#212121"
+                  color: "#212121",
+                  fontFamily: "openSans"
                 }}
               >
                 <FontAwesomeIcon icon={faRupeeSign} />
                 {order.orderData.orderPrice}
               </span>
             </p>
-            <p style={{ fontSize: "18px", color: "#555555" }}>
+            <p
+              style={{
+                fontSize: "17px",
+                color: "#555555",
+                fontFamily: "openSansSemiBold"
+              }}
+            >
               Delivered at:{" "}
               <span
                 style={{
                   fontSize: "17px",
                   paddingLeft: "5px",
-                  color: "#212121"
+                  color: "#212121",
+                  fontFamily: "openSans"
                 }}
               >
                 {order.orderDeliveredTime}
@@ -62,12 +83,12 @@ CompletedOrders.propTypes = {
 CompletedOrders.defaultProps = {
   orders: [
     {
-      orderID: "orderID",
+      orderID: "OR-0001",
       orderData: {
         orderPrice: 100,
         products: [
           {
-            productName: "name"
+            productName: "Test product"
           }
         ]
       },
