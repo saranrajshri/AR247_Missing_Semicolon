@@ -21,7 +21,7 @@ const AddCertfiedSeeds = () => {
   });
   const { setAlert, setFullScreenLoader, supplierData } = useContext(Context);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -38,30 +38,36 @@ const AddCertfiedSeeds = () => {
     });
   };
 
+  const sleep = milliseconds => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+  };
+
   const add = () => {
-    var cdata = formData;
-    cdata.supplierID = supplierData._id;
-    console.log("CDATA : " + cdata);
-    addCertifiedSeeds(cdata)
-      .then((res) => {
-        if (res.status === 200) {
-          console.log(res);
+    sleep(2000).then(() => {
+      var cdata = formData;
+      cdata.supplierID = supplierData._id;
+      console.log("CDATA : " + cdata);
+      addCertifiedSeeds(cdata)
+        .then(res => {
+          if (res.status === 200) {
+            console.log(res);
+            setFullScreenLoader(false);
+            setAlert({
+              alertType: "positive",
+              isOpen: true,
+              message: "Added to Inventory"
+            });
+            clear();
+          } else {
+            setFullScreenLoader(false);
+            console.log("From Else");
+          }
+        })
+        .catch(err => {
           setFullScreenLoader(false);
-          setAlert({
-            alertType: "positive",
-            isOpen: true,
-            message: "Added to Inventory"
-          });
-          clear();
-        } else {
-          setFullScreenLoader(false);
-          console.log("From Else");
-        }
-      })
-      .catch((err) => {
-        setFullScreenLoader(false);
-        console.log("From Catch");
-      });
+          console.log("From Catch");
+        });
+    });
   };
 
   return (
