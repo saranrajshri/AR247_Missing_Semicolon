@@ -18,6 +18,9 @@ Yarn | 1.22.4
 ## Backend API Docs
 [https://documenter.getpostman.com/view/11602045/T17M8RWo?version=latest](https://documenter.getpostman.com/view/11602045/T17M8RWo?version=latest)
 
+## Presentation link
+[https://docs.google.com/presentation/d/1rrEHFw3VO08BuHhG9z8uYF5VqMNcSkdvFo0bNsDPSPE/edit?usp=sharing](https://docs.google.com/presentation/d/1rrEHFw3VO08BuHhG9z8uYF5VqMNcSkdvFo0bNsDPSPE/edit?usp=sharing)
+
 ## Installation
 
 Clone the repository.
