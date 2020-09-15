@@ -4,6 +4,7 @@
 
 This project is developed for the Smart India Hackathon 2020.
 
+Web App Link - [http://mrjutedev.herokuapp.com/](http://mrjutedev.herokuapp.com/)
 
 ## Configuration
 
